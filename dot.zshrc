@@ -67,7 +67,6 @@ if [[ $OSTYPE = (linux)* ]]; then
 fi
 
 # Common aliases
-
 alias rm="rm -v"
 alias cp="cp -v"
 alias mv="mv -v"
@@ -76,7 +75,8 @@ alias ll="ls $LS_OPTIONS -lAhFtr"
 alias ccat="pygmentize -O style=monokai -f 256 -g"
 alias cat=ccat
 alias dig="dig +nocmd any +multiline +noall +answer"
-
+alias file="dde-file-manager"
+alias studio="~/Android/android-studio/bin/studio.sh"
 disable -r time       # disable shell reserved word
 alias time='time -p ' # -p for POSIX output
 
@@ -114,17 +114,17 @@ zplug "mollifier/anyframe"
 
 # Miscellaneous commands
 #zplug "andrewferrier/fzf-z"
-#zplug "k4rthik/git-cal", as:command
-zplug "peco/peco", as:command, from:gh-r, use:"*${(L)$(uname -s)}*amd64*"
-zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, use:"*${(L)$(uname -s)}*amd64*"
-zplug "junegunn/fzf", use:"shell/*.zsh"
+# zplug "k4rthik/git-cal", as:command
+# zplug "peco/peco", as:command, from:gh-r, use:"*${(L)$(uname -s)}*amd64*"
+# zplug "junegunn/fzf-bin", as:command, from:gh-r, rename-to:fzf, use:"*${(L)$(uname -s)}*amd64*"
+# zplug "junegunn/fzf", use:"shell/*.zsh"
 #zplug "b4b4r07/easy-oneliner", if:"which fzf", on:"junegunn/fzf-bin"
 
 # Enhanced cd
 zplug "b4b4r07/enhancd", use:init.sh
 
 # Bookmarks and jump
-# zplug "jocelynmallon/zshmarks"
+zplug "jocelynmallon/zshmarks"
 
 # Enhanced dir list with git features
 zplug "supercrabtree/k"
@@ -133,13 +133,12 @@ zplug "supercrabtree/k"
 zplug "tarrasch/zsh-bd"
 
 # Simple zsh calculator
-#zplug "arzzen/calc.plugin.zsh"
+zplug "arzzen/calc.plugin.zsh"
 
 # Directory colors
 zplug "seebi/dircolors-solarized", ignore:"*", as:plugin
 zplug "pinelibg/dircolors-solarized-zsh"
 
-zplug "plugins/adb",     from:oh-my-zsh
 zplug "plugins/common-aliase",     from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/copydir",           from:oh-my-zsh
@@ -149,9 +148,8 @@ zplug "plugins/dircycle",          from:oh-my-zsh
 zplug "plugins/encode64",          from:oh-my-zsh
 zplug "plugins/extract",           from:oh-my-zsh
 zplug "plugins/history",           from:oh-my-zsh
-zplug "plugins/ng",           from:oh-my-zsh
-#zplug "plugins/tmux",              from:oh-my-zsh
-#zplug "plugins/tmuxinator",        from:oh-my-zsh
+zplug "plugins/tmux",              from:oh-my-zsh
+zplug "plugins/tmuxinator",        from:oh-my-zsh
 zplug "plugins/urltools",          from:oh-my-zsh
 zplug "plugins/web-search",        from:oh-my-zsh
 zplug "plugins/z",                 from:oh-my-zsh
@@ -172,18 +170,21 @@ if [[ $OSTYPE = (darwin)* ]]; then
 fi
 
 zplug "plugins/git",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "plugins/jump",               from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "plugins/svn",               from:oh-my-zsh, if:"(( $+commands[svn] ))"
+# zplug "plugins/golang",            from:oh-my-zsh, if:"(( $+commands[go] ))"
+# zplug "plugins/svn",               from:oh-my-zsh, if:"(( $+commands[svn] ))"
 zplug "plugins/node",              from:oh-my-zsh, if:"(( $+commands[node] ))"
 zplug "plugins/npm",               from:oh-my-zsh, if:"(( $+commands[npm] ))"
-#zplug "plugins/bundler",           from:oh-my-zsh, if:"(( $+commands[bundler] ))"
-#zplug "plugins/rvm",               from:oh-my-zsh, if:"(( $+commands[rvm] ))"
+# zplug "plugins/bundler",           from:oh-my-zsh, if:"(( $+commands[bundler] ))"
+# zplug "plugins/gem",               from:oh-my-zsh, if:"(( $+commands[gem] ))"
+# zplug "plugins/rvm",               from:oh-my-zsh, if:"(( $+commands[rvm] ))"
 zplug "plugins/pip",               from:oh-my-zsh, if:"(( $+commands[pip] ))"
 zplug "plugins/sudo",              from:oh-my-zsh, if:"(( $+commands[sudo] ))"
 zplug "plugins/gpg-agent",         from:oh-my-zsh, if:"(( $+commands[gpg-agent] ))"
 zplug "plugins/systemd",           from:oh-my-zsh, if:"(( $+commands[systemctl] ))"
-#zplug "plugins/terraform",         from:oh-my-zsh, if:"(( $+commands[terraform] ))"
-#zplug "plugins/vagrant",           from:oh-my-zsh, if:"(( $+commands[vagrant] ))"
+# zplug "plugins/docker",            from:oh-my-zsh, if:"(( $+commands[docker] ))"
+# zplug "plugins/docker-compose",    from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
+# zplug "plugins/terraform",         from:oh-my-zsh, if:"(( $+commands[terraform] ))"
+# zplug "plugins/vagrant",           from:oh-my-zsh, if:"(( $+commands[vagrant] ))"
 
 #zplug "djui/alias-tips"
 zplug "hlissner/zsh-autopair", defer:2
@@ -504,7 +505,14 @@ if zplug check "bhilburn/powerlevel9k"; then
     # Easily switch primary foreground/background colors
     #DEFAULT_FOREGROUND=038 DEFAULT_BACKGROUND=024 PROMPT_COLOR=038
 
-    DEFAULT_FOREGROUND=006 DEFAULT_BACKGROUND=235
+    # DEFAULT_FOREGROUND=006 DEFAULT_BACKGROUND=235 PROMPT_COLOR=173
+    # DEFAULT_FOREGROUND=198 DEFAULT_BACKGROUND=090 PROMPT_COLOR=173
+    # DEFAULT_FOREGROUND=235 DEFAULT_BACKGROUND=159 PROMPT_COLOR=173
+    # DEFAULT_FOREGROUND=123 DEFAULT_BACKGROUND=059 PROMPT_COLOR=183
+    # DEFAULT_FOREGROUND=159 DEFAULT_BACKGROUND=238 PROMPT_COLOR=173
+    # DEFAULT_FOREGROUND=159 DEFAULT_BACKGROUND=239 PROMPT_COLOR=172
+    
+     DEFAULT_FOREGROUND=006 DEFAULT_BACKGROUND=235
     DEFAULT_COLOR=$DEFAULT_FOREGROUND
 
 
@@ -513,9 +521,12 @@ if zplug check "bhilburn/powerlevel9k"; then
     P9K_CONTEXT_ROOT_FOREGROUND="$DEFAULT_FOREGROUND"
     P9K_CONTEXT_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
 
+    #DEFAULT_COLOR=$DEFAULT_FOREGROUND
+    DEFAULT_COLOR="clear"
+
     P9K_MODE="nerdfont-complete"
     P9K_STATUS_VERBOSE=false
-    P9K_DIR_SHORTEN_LENGTH=2
+    P9K_DIR_SHORTEN_LENGTH=1
     #P9K_SHORTEN_STRATEGY="truncate_right"
 
     P9K_DIR_OMIT_FIRST_CHARACTER=false
@@ -523,7 +534,7 @@ if zplug check "bhilburn/powerlevel9k"; then
     P9K_CONTEXT_ALWAYS_SHOW=true
     P9K_CONTEXT_ALWAYS_SHOW_USER=false
 
-    P9K_CONTEXT_TEMPLATE="\uf31b"
+    #P9K_CONTEXT_TEMPLATE="\uF109 %m"
 
     #P9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
     #P9K_RIGHT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
@@ -544,12 +555,12 @@ if zplug check "bhilburn/powerlevel9k"; then
     #P9K_RIGHT_SEGMENT_SEPARATOR="\uE0B6"
     # P9K_LEFT_SEGMENT_SEPARATOR_ICON='▓▒░'
     # P9K_RIGHT_SEGMENT_SEPARATOR_ICON='░▒▓'
-    #P9K_LEFT_SEGMENT_SEPARATOR="\uE0BC\u200A"
-    #P9K_RIGHT_SEGMENT_SEPARATOR="\u200A\uE0BA"
+    P9K_LEFT_SEGMENT_SEPARATOR_ICON="\uE0B4"
+    P9K_RIGHT_SEGMENT_SEPARATOR_ICON="\uE0B6"
     #P9K_LEFT_SEGMENT_SEPARATOR="\uE0BC"
     #P9K_RIGHT_SEGMENT_SEPARATOR="\uE0BA"
-    #P9K_LEFT_SEGMENT_SEPARATOR="%F{$DEFAULT_BACKGROUND}\uE0BC%f"
-    #P9K_RIGHT_SEGMENT_SEPARATOR="%F{$DEFAULT_BACKGROUND}\uE0BA%f"
+    # P9K_LEFT_SEGMENT_SEPARATOR="%F{$DEFAULT_BACKGROUND}\uE0BC%f"
+    # P9K_RIGHT_SEGMENT_SEPARATOR="%F{$DEFAULT_BACKGROUND}\uE0BA%f"
 
     P9K_PROMPT_ON_NEWLINE=true
     P9K_RPROMPT_ON_NEWLINE=false
@@ -557,16 +568,11 @@ if zplug check "bhilburn/powerlevel9k"; then
     P9K_STATUS_VERBOSE=true
     P9K_STATUS_CROSS=true
     P9K_PROMPT_ADD_NEWLINE=true
-    P9K_LEFT_SEGMENT_SEPARATOR_ICON=$'\uE0B4'
-    # P9K_LEFT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
-    P9K_RIGHT_SEGMENT_SEPARATOR_ICON=$'\uE0B6'
-    # P9K_RIGHT_SUBSEGMENT_SEPARATOR="%F{$(( $DEFAULT_BACKGROUND - 2 ))}|%f"
 
-    P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON=$'%F{cyan}\u256D\u2500%F{$DEFAULT_BACKGROUND)}\uE0B6%f'
-    P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON=$'%F{014}╰%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f '
-   
     # P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}%f"
     # P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}➜ %f"
+    P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON=$'%F{cyan}\u256D\u2500%F{$DEFAULT_BACKGROUND)}\uE0B6%f'
+    P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON=$'%F{014}╰%F{cyan}\uF460%F{073}\uF460%F{109}\uF460%f '
     #P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}⇢ ➜  %f"
     #P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR} ┄⇢ %f"
 
@@ -576,10 +582,12 @@ if zplug check "bhilburn/powerlevel9k"; then
     #P9K_LEFT_PROMPT_ELEMENTS=(os_icon context dir_writable dir_joined vcs)
     #P9K_LEFT_PROMPT_ELEMENTS=(context dir_writable dir_joined vcs)
     #P9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator exec_time background_jobs time)
-    P9K_LEFT_PROMPT_ELEMENTS=(context dir dir_writable vcs)
-    P9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time)
+    P9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs)
+    P9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time)
 
-    P9K_LINUX_ICON='\uF31B'
+    P9K_MODE='nerdfont-complete'
+
+      P9K_LINUX_ICON='\uF31B'
     P9K_VCS_CLEAN_BACKGROUND="green"
     P9K_VCS_CLEAN_FOREGROUND="$DEFAULT_BACKGROUND"
     P9K_VCS_MODIFIED_BACKGROUND="yellow"
@@ -594,64 +602,70 @@ if zplug check "bhilburn/powerlevel9k"; then
     P9K_DIR_DEFAULT_FOREGROUND="$DEFAULT_BACKGROUND"
     P9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="$DEFAULT_FOREGROUND"
     P9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="$DEFAULT_BACKGROUND"
-    P9K_STATUS_OK_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_STATUS_OK_FOREGROUND="green"
-    P9K_STATUS_OK_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_STATUS_OK_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
-    P9K_STATUS_ERROR_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_STATUS_ERROR_FOREGROUND="red"
-    P9K_STATUS_ERROR_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_STATUS_ERROR_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
-    P9K_HISTORY_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_TIME_FORMAT="%D{%T \uF017}" #  15:29:33
-    P9K_TIME_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_TIME_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_COMMAND_EXECUTION_TIME_FOREGROUND="$DEFAULT_BACKGROUND"
-    P9K_COMMAND_EXECUTION_TIME_BACKGROUND="$DEFAULT_FOREGROUND"
-    P9K_COMMAND_EXECUTION_TIME_ICON=$'\u23F1'
-    P9K_BACKGROUND_JOBS_FOREGROUND="$DEFAULT_BACKGROUND"
-    P9K_BACKGROUND_JOBS_BACKGROUND="$DEFAULT_FOREGROUND"
-    P9K_USER__DEFAULT_ICON=$'\uF415' # 
-    P9K_USER_DEFAULT_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_USER_DEFAULT_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_USER_ROOT_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_USER_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_ROOT_INDICATOR_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_ROOT_INDICATOR_FOREGROUND="magenta"
     P9K_ROOT_INDICATOR_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_ROOT_INDICATOR_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
-    P9K_ROOT_INDICATOR_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
-    P9K_USER_ROOT_ICON=$'\uF198'  # 
-    #L9K_ROOT_ICON=$'\uFF03' # ＃
-    P9K_SSH_FOREGROUND="yellow"
-    P9K_SSH_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_SSH_BACKGROUND="$(( $DEFAULT_BACKGROUND + 2 ))"
-    P9K_SSH_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_SSH_ICON=$'\uF489'  # 
-    P9K_SSH_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
-    P9K_HOST_LOCAL_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_HOST_LOCAL_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_HOST_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_HOST_REMOTE_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_HOST_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_HOST_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_OS_ICON_FOREGROUND="$DEFAULT_FOREGROUND"
-    P9K_HOST_LOCAL_ICON=$'\uF109' # 
-    P9K_LOAD_CRITICAL_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_OS_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_LOAD_NORMAL_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_LOAD_WARNING_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_LOAD_WARNING_FOREGROUND="yellow"
-    P9K_LOAD_CRITICAL_FOREGROUND="red"
-    P9K_LOAD_CRITICAL_VISUAL_IDENTIFIER_COLOR="red"
-    P9K_LOAD_NORMAL_FOREGROUND="green"
-    P9K_LOAD_NORMAL_VISUAL_IDENTIFIER_COLOR="green"
-    P9K_LOAD_WARNING_VISUAL_IDENTIFIER_COLOR="yellow"
-    P9K_BATTERY_CHARGING_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_BATTERY_LEVEL_BACKGROUND_COLOR="$DEFAULT_BACKGROUND"
-    P9K_BATTERY_DISCONNECTED_BACKGROUND="$DEFAULT_BACKGROUND"
-    P9K_BATTERY_CHARGED_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_ROOT_INDICATOR_FOREGROUND="red"
 
+    P9K_STATUS_OK_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_STATUS_OK_FOREGROUND="green"
+    P9K_STATUS_ERROR_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_STATUS_ERROR_FOREGROUND="red"
+
+    #P9K_TIME_FORMAT="%D{%H:%M:%S \uf017}" #  Jun 15  09:32
+    P9K_TIME_ICON="\uF017" # 
+    #P9K_TIME_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
+    P9K_TIME_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_TIME_FOREGROUND="183"
+
+    P9K_COMMAND_EXECUTION_TIME_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_COMMAND_EXECUTION_TIME_FOREGROUND="183"
+    P9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+    P9K_COMMAND_EXECUTION_TIME_PRECISION=1
+
+    P9K_BACKGROUND_JOBS_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_BACKGROUND_JOBS_FOREGROUND="123"
+
+    P9K_USER_DEFAULT_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_USER_DEFAULT_FOREGROUND="cyan"
+    P9K_USER_SUDO_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_USER_SUDO_FOREGROUND="magenta"
+    P9K_USER_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_USER_ROOT_FOREGROUND="red"
+    P9K_USER_DEFAULT_ICON="\uF415" # 
+    P9K_USER_ROOT_ICON=$'\uFF03' # ＃
+
+    P9K_CONTEXT_TEMPLATE="\uF109 %m"
+    #P9K_CONTEXT_TEMPLATE="\uF109 %m"
+    P9K_CONTEXT_DEFAULT_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_CONTEXT_DEFAULT_FOREGROUND="$DEFAULT_FOREGROUND"
+    P9K_CONTEXT_DEFAULT_FOREGROUND="123"
+    P9K_CONTEXT_SUDO_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_CONTEXT_SUDO_FOREGROUND="$DEFAULT_FOREGROUND"
+    P9K_CONTEXT_SUDO_FOREGROUND="123"
+    P9K_CONTEXT_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_CONTEXT_REMOTE_FOREGROUND="$DEFAULT_FOREGROUND"
+    P9K_CONTEXT_REMOTE_FOREGROUND="123"
+    P9K_CONTEXT_REMOTE_SUDO_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_CONTEXT_REMOTE_SUDO_FOREGROUND="$DEFAULT_FOREGROUND"
+    P9K_CONTEXT_REMOTE_SUDO_FOREGROUND="123"
+    P9K_CONTEXT_ROOT_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_CONTEXT_ROOT_FOREGROUND="$DEFAULT_FOREGROUND"
+    P9K_CONTEXT_ROOT_FOREGROUND="123"
+
+    P9K_HOST_LOCAL_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_HOST_LOCAL_FOREGROUND="cyan"
+    P9K_HOST_REMOTE_BACKGROUND="$DEFAULT_BACKGROUND"
+    #P9K_HOST_REMOTE_FOREGROUND="magenta"
+    P9K_HOST_LOCAL_ICON="\uF109 " # 
+    P9K_HOST_REMOTE_ICON="\uF489 "  # 
+
+    P9K_SSH_ICON="\uF489 "  # 
+    #P9K_SSH_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
+    P9K_SSH_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_SSH_FOREGROUND="212"
+    #P9K_OS_ICON_BACKGROUND="$(( $DEFAULT_BACKGROUND - 2 ))"
+    P9K_OS_ICON_BACKGROUND="$DEFAULT_BACKGROUND"
+    P9K_OS_ICON_FOREGROUND="212"
+    #P9K_SHOW_CHANGESET=true
 fi
 
 # Then, source plugins and add commands to $PATH
@@ -702,17 +716,10 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
 #ZLE_RPROMPT_INDENT=0
-
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 source $HOME/.zplug/repos/arzzen/calc.plugin.zsh/calc.plugin.zsh
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
-# Set LS_COLORS environment by Deepin
-if [[ ("$TERM" = *256color || "$TERM" = screen* || "$TERM" = xterm* ) && -f /etc/lscolor-256color ]]; then
-    eval $(dircolors -b /etc/lscolor-256color)
-else
-    eval $(dircolors)
-fi
-
+# vim: ft=zsh sw=4 sts=4 et
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -723,4 +730,3 @@ export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH=$PATH:~/Android/gradle-4.9/bin
 export PATH=$PATH:~/Android/flutter/bin
 
-# vim: ft=zsh sw=4 sts=4 et
