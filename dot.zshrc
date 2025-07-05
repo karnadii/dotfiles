@@ -1,9 +1,16 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+#==============================================================================
+# 🚀 INSTANT PROMPT & PLUGIN MANAGER
+#==============================================================================
+
+# Enable Powerlevel10k instant prompt for near-instant shell startup.
+# This should stay at the very top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-### Added by Zinit's installer
+### Added by Zinit's installer ###
+# This block checks if Zinit (a Zsh plugin manager) is installed.
+# If not, it clones the repository from GitHub to automatically install it.
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
     command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
@@ -12,76 +19,140 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
         print -P "%F{160} The clone has failed.%f%b"
 fi
 
+# Source the Zinit script to load the plugin manager into the shell.
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+# Load Zinit's own completions.
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
+#==============================================================================
+# ⚙️ ENVIRONMENT VARIABLES
+#==============================================================================
+
+# Set Zsh as the default shell environment for other programs.
 export SHELL="/bin/zsh"
+# Set 'nano' as the default command-line text editor.
 export EDITOR="nano"
+# Define the path to the shell history file.
 export HISTFILE="$HOME/.zsh_history"
+# Set the maximum number of lines to keep in memory for history.
 export HISTSIZE=10000
+# Set the maximum number of lines to save in the history file.
+# export EDITOR="nano" # FIX: This is a duplicate and has been removed.
 export SAVEHIST=$HISTSIZE
 
-#==============================================================================
-# ENHANCED ALIASES
-#==============================================================================
-alias rm="rm -iv"               # Interactive verbose removal
-alias cp="cp -iv"               # Interactive verbose copy
-alias mv="mv -iv"               # Interactive verbose move
-alias ls="ls --color=auto --group-directories-first"
-alias ll="ls -lh"               # Detailed list view
-alias la="ls -A"                # Show hidden files
-alias lla="ls -lAh"             # Detailed list view with hidden files
-alias ccat="pygmentize -O style=monokai -f 256 -g"
-alias zshrc="${EDITOR} ~/.zshrc" # Quick edit zshrc
-alias reload="source ~/.zshrc"  # Reload zsh config
-alias grep="grep --color=auto"  # Colorized grep
 
-# Directory navigation
-alias ..="cd .."
+#==============================================================================
+# ✨ ENHANCED ALIASES
+#==============================================================================
+
+# Safer file operations: prompt before overwriting/deleting (-i) and be verbose (-v).
+alias rm="rm -iv"
+alias cp="cp -iv"
+alias mv="mv -iv"
+
+# Replace standard commands with modern, better alternatives.
+alias ls="eza --color=auto --group-directories-first"  # Use 'eza' for listings.
+alias cat="bat"                                       # Use 'bat' for viewing files with syntax highlighting.
+alias grep="rg"                                       # Use 'ripgrep' (rg) for faster, better searching.
+
+# Common 'ls' (eza) shortcuts.
+alias ll="ls -lh"      # Detailed list view (long, human-readable).
+alias la="ls -a"       # Show hidden files (dotfiles).
+alias lla="ls -lah"    # Detailed list view with hidden files.
+alias lt="ls --tree"   # Tree view of the current directory.
+alias ltr="ls --tree -L 2" # Tree view limited to 2 levels deep.
+
+# Convenience aliases.
+alias zshrc="${EDITOR} ~/.zshrc" # Quickly open this file for editing.
+alias reload="source ~/.zshrc"  # Quickly apply changes to this file.
+
+# Directory navigation shortcuts.
+# alias ..="cd .." # Not needed; handled by the 'autocd' option.
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
 #------------------------------------------------------------------------------
-# ENHANCED PLUGINS
+# 🎨 DIRCOLORS SETUP
 #------------------------------------------------------------------------------
 
-# Theme (should stay first)
+# This section configures colors for file listings (ls, eza, etc.).
+# It prioritizes 'vivid' to generate a nice color theme (catppuccin-latte).
+if command -v vivid &> /dev/null; then
+    export LS_COLORS="$(vivid generate catppuccin-latte)"
+# If 'vivid' is not found, it falls back to a user-defined or default dircolors file.
+elif [[ -f ~/.dircolors ]]; then
+    eval "$(dircolors -b ~/.dircolors)"
+else
+    # Fallback to default system colors.
+    eval "$(dircolors -b)"
+fi
+
+# Apply the generated colors to 'eza' and Zsh's built-in completion system.
+export EXA_COLORS="$LS_COLORS"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+#------------------------------------------------------------------------------
+# 🧩 ZINIT PLUGINS
+#------------------------------------------------------------------------------
+
+# --- Theme (should be loaded first for prompt speed) ---
+# `zinit ice depth=1` does a shallow clone for faster installation.
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Core utilities
+# --- Core Shell Utilities ---
+# Fish-like autosuggestions based on command history.
 zinit light zsh-users/zsh-autosuggestions
+# Advanced tab completions for many common commands.
+# `ice wait'1' lucid` loads the plugin after a 1-second delay without printing messages.
 zinit ice wait'1' lucid; zinit light zsh-users/zsh-completions
+# Allows searching history by typing a substring and pressing Up/Down arrows.
 zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
 zinit light zsh-users/zsh-history-substring-search
+# Automatically adds closing brackets, quotes, etc.
 zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
 zinit light hlissner/zsh-autopair
 
-# Productivity boosters
-zinit light junegunn/fzf
-zinit light wfxr/forgit
-zinit light MichaelAquilina/zsh-you-should-use
-zinit light Aloxaf/fzf-tab
-zinit light arzzen/calc.plugin.zsh
+# --- Productivity Boosters ---
+zinit light junegunn/fzf                     # A command-line fuzzy finder.
+zinit light wfxr/forgit                      # Interactive git commands using fzf.
+zinit light MichaelAquilina/zsh-you-should-use # Reminds you to use existing aliases.
+zinit light Aloxaf/fzf-tab                   # Replaces Zsh's completion menu with fzf.
+zinit light arzzen/calc.plugin.zsh           # A simple calculator in Zsh.
 
-# Smarter directory jumping
+# --- Modern Command Replacements (installed via Zinit) ---
+# 'zinit ice as"command"...' downloads the binary from GitHub Releases and puts it on the PATH.
+zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zinit light sharkdp/bat
+zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
+zinit light sharkdp/fd
+zinit ice as"command" from"gh-r" mv"rg* -> rg" pick"rg/rg"
+zinit light BurntSushi/ripgrep
+zinit ice as"command" from"gh-r" mv"eza* -> eza" pick"eza/eza"
+zinit light eza-community/eza
+
+# --- Smarter Directory Jumping ---
+# 'zoxide' learns your most used directories for quick navigation (e.g., `z project`).
 zinit ice as"command" from"gh-r" mv"zoxide* -> zoxide" pick"zoxide"
 zinit light ajeetdsouza/zoxide
 
-# Oh-My-Zsh Plugins (updated)
+# --- Oh-My-Zsh (OMZ) Plugins ---
+# Zinit can load OMZ plugins without needing the full framework.
+# `ice if"[...` only loads the plugin if the specified command exists.
 zinit ice if"[ -x "$(command -v git)" ]"; zinit snippet OMZ::plugins/git/git.plugin.zsh
 zinit ice if"[ -x "$(command -v bun)" ]"; zinit snippet OMZ::plugins/bun/bun.plugin.zsh
-zinit snippet OMZ::plugins/extract/extract.plugin.zsh
-zinit snippet OMZ::plugins/history/history.plugin.zsh
+zinit snippet OMZ::plugins/extract/extract.plugin.zsh # 'extract' any archive type.
+zinit snippet OMZ::plugins/history/history.plugin.zsh # `h` for history search.
 zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
-zinit snippet OMZ::plugins/copyfile/copyfile.plugin.zsh
-zinit snippet OMZ::plugins/copypath/copypath.plugin.zsh
+zinit snippet OMZ::plugins/copyfile/copyfile.plugin.zsh # `copyfile <file>` to clipboard.
+zinit snippet OMZ::plugins/copypath/copypath.plugin.zsh   # `copypath` to clipboard.
 zinit snippet OMZ::plugins/cp/cp.plugin.zsh
-zinit snippet OMZ::plugins/dircycle/dircycle.plugin.zsh
-zinit snippet OMZ::plugins/encode64/encode64.plugin.zsh
-zinit snippet OMZ::plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh
-zinit snippet OMZ::plugins/urltools/urltools.plugin.zsh
-zinit snippet OMZ::plugins/web-search/web-search.plugin.zsh
+zinit snippet OMZ::plugins/dircycle/dircycle.plugin.zsh # Cycle through recent directories.
+zinit snippet OMZ::plugins/encode64/encode64.plugin.zsh # base64 encoding/decoding.
+zinit snippet OMZ::plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh # Better Ctrl+Z handling.
+zinit snippet OMZ::plugins/urltools/urltools.plugin.zsh # URL encoding/decoding.
+# zinit snippet OMZ::plugins/web-search/web-search.plugin.zsh # e.g., 'google something'. # BROKEN TOOLS
+zinit snippet OMZ::plugins/asdf/asdf.plugin.zsh
 zinit ice if"[ -x "$(command -v node)" ]"; zinit snippet OMZ::plugins/node/node.plugin.zsh
 zinit ice if"[ -x "$(command -v nvm)" ]"; zinit snippet OMZ::plugins/nvm/nvm.plugin.zsh
 zinit ice if"[ -x "$(command -v pip)" ]"; zinit snippet OMZ::plugins/pip/pip.plugin.zsh
@@ -93,48 +164,51 @@ zinit ice if"[ -x "$(command -v go)" ]"; zinit snippet OMZ::plugins/golang/golan
 zinit ice if"[ -x "$(command -v ngrok)" ]"; zinit snippet OMZ::plugins/ngrok/ngrok.plugin.zsh
 zinit ice if"[ -x "$(command -v svn)" ]"; zinit snippet OMZ::plugins/svn/svn.plugin.zsh
 
-# Colored man pages
+# --- Colored Man Pages ---
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
-# Fast syntax highlighting (should be last)
+# --- Fast Syntax Highlighting (should be loaded last) ---
 zinit light zdharma-continuum/fast-syntax-highlighting
 
-# Initialize zoxide
+# Initialize zoxide to enable its functionality in the shell.
 eval "$(zoxide init zsh)"
 
 #==============================================================================
-# SHELL OPTIONS (setopt)
+# 🐚 SHELL OPTIONS (setopt)
 #==============================================================================
-setopt autocd
-setopt append_history
-setopt auto_list
-setopt auto_menu
-setopt auto_pushd
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_find_no_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt inc_append_history
-setopt interactive_comments
-setopt magic_equal_subst
-setopt no_beep
-setopt no_hist_beep
-setopt no_list_beep
-setopt notify
-setopt print_eight_bit
-setopt print_exit_value
-setopt prompt_subst
-setopt pushd_ignore_dups
-setopt share_history
-setopt transient_rprompt
+# These options fine-tune Zsh's behavior.
+
+setopt autocd                  # Type a directory name to 'cd' into it.
+setopt append_history          # Appends history to file instead of overwriting.
+setopt auto_list               # Automatically list choices on ambiguous completion.
+setopt auto_menu               # Show a menu for completion choices.
+setopt auto_pushd              # Automatically manage a directory stack.
+setopt extended_history        # Save timestamps and duration for each command.
+setopt hist_expire_dups_first  # When trimming history, remove duplicates first.
+setopt hist_find_no_dups       # Don't show duplicates when searching history.
+setopt hist_ignore_all_dups    # If a new command is a duplicate, remove the old one.
+setopt hist_ignore_dups        # Don't record a command if it's a duplicate of the previous one.
+setopt hist_ignore_space       # Don't record commands that start with a space.
+setopt hist_reduce_blanks      # Remove superfluous blanks from history entries.
+setopt hist_save_no_dups       # Don't save duplicate entries in the history file.
+setopt inc_append_history      # Save history immediately after a command is run.
+setopt interactive_comments    # Allow comments in an interactive shell.
+setopt magic_equal_subst       # Enable filename expansion for commands like 'ls =.txt'.
+setopt no_beep                 # Disable all audible terminal bells.
+setopt no_hist_beep            # No beep on history navigation errors.
+setopt no_list_beep            # No beep on completion list ambiguity.
+setopt notify                  # Report status of background jobs immediately.
+setopt print_eight_bit         # Display eight-bit characters correctly.
+setopt print_exit_value        # Print exit value of programs that return non-zero.
+setopt prompt_subst            # Allow substitutions in the prompt string.
+setopt pushd_ignore_dups       # Don't push duplicate directories to the stack.
+setopt share_history           # Share command history between all running shells.
+setopt transient_rprompt       # Keep the right-side prompt only on the current line.
 
 #==============================================================================
-# ENHANCED KEY BINDINGS
+# ⌨️ ENHANCED KEY BINDINGS
 #==============================================================================
+# Set Emacs-style key bindings for line editing.
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
 bindkey "^f" forward-word
@@ -148,52 +222,39 @@ bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^F" history-incremental-pattern-search-forward
 bindkey "^i" expand-or-complete-prefix
 
-# Better history navigation
+# Better history navigation with zsh-history-substring-search.
+# Type part of a command, then press Up/Down to cycle through matches.
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 #==============================================================================
-# FZF CONFIGURATION
+# 🔎 FZF CONFIGURATION
 #==============================================================================
-# Use fd for better performance
+# Use 'fd' (a faster 'find' alternative) for fzf's file searching.
 if command -v fd >/dev/null; then
   export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 fi
 
-# Apply fzf key bindings
+# Apply fzf's default key bindings (Ctrl+T, Ctrl+R, Alt+C).
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #==============================================================================
-# USER CONFIGURATION
+# 👤 USER CONFIGURATION
 #==============================================================================
-# asdf
-. "$HOME/.asdf/asdf.sh"
-export ASDF_DIR="$HOME/.asdf"
-fpath=(${ASDF_DIR}/completions $fpath)
-autoload -Uz compinit && compinit
+# This section is for user-specific tools and environments.
 
-# Powerlevel10k
+# asdf (version manager)
+# It is recommended to use asdf to manage all languages (Node, Python, Go, Bun, etc.)
+export ASDF_DIR="$HOME/.asdf"
+fpath=(${ASDF_DIR}/internal/completions $fpath)
+
+# Powerlevel10k theme configuration.
+# This file is generated by `p10k configure` and contains all visual settings for the prompt.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Go
-export PATH=$PATH:/usr/local/go/bin
-
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-# Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
 # Local environment settings
+# A good practice for sourcing a file with private environment variables (e.g., API keys).
+# This file is not typically checked into version control.
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
