@@ -1,0 +1,61 @@
+{
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "colorScheme": "Andromeda",
+            "font": 
+            {
+                "face": "OperatorMono Nerd Font"
+            }
+        }
+    },
+    "schemes": 
+    [
+        {
+            "name": "Andromeda",
+            "background": "#23262E",
+            "foreground": "#D5CED9",
+
+            "black": "#23262E",
+            "blue": "#7cb7ff",
+            "cyan": "#00e8c6",
+            "green": "#96E072",
+            "purple": "#c74ded",
+            "red": "#ee5d43",
+            "white": "#D5CED9",
+            "yellow": "#FFE66D",
+
+            "brightBlack": "#746f77",
+            "brightBlue": "#7cb7ff",
+            "brightCyan": "#00e8c6",
+            "brightGreen": "#96E072",
+            "brightPurple": "#ff00aa",
+            "brightRed": "#FC644D",
+            "brightWhite": "#FFFFFF",
+            "brightYellow": "#FFE66D",
+
+            "selectionBackground": "#3D4352",
+            "cursorColor": "#FFFFFF"
+        }
+    ],
+    "theme": "Andromeda",
+    "themes": 
+    [
+       {
+            "name": "Andromeda",
+            "tab": {
+                "background": "#2E323D",
+                "unfocusedBackground": "#23262E",
+                "showCloseButton": "always"
+            },
+            "tabRow": {
+                "background": "#23262E",
+                "unfocusedBackground": "#1B1D23"
+            },
+            "window": {
+                "applicationTheme": "dark"
+            }
+        }
+    ]
+}

@@ -1,0 +1,139 @@
+# Andromeda theme for vivid
+# Based on https://github.com/EliverLara/Andromeda
+
+colors:
+  # Andromeda Palette
+  background: '23262E'
+  foreground: 'D5CED9'
+  comment: 'A0A1A7'
+  cyan: '00e8c6'
+  orange: 'f39c12'
+  yellow: 'FFE66D'
+  pink: 'ff00aa'
+  hot_pink: 'f92672'
+  purple: 'c74ded'
+  blue: '7cb7ff'
+  red: 'ee5d43'
+  green: '96E072'
+  dark_grey: '746f77'
+
+core:
+  normal_text:
+    foreground: foreground
+
+  regular_file:
+    foreground: foreground
+
+  reset_to_normal: {}
+
+  directory:
+    foreground: cyan
+    font-style: bold
+
+  symlink:
+    foreground: pink
+
+  multi_hard_link:
+    foreground: yellow
+
+  fifo:
+    foreground: background
+    background: yellow
+
+  socket:
+    foreground: background
+    background: pink
+
+  door:
+    foreground: background
+    background: pink
+
+  block_device:
+    foreground: background
+    background: yellow
+
+  character_device:
+    foreground: background
+    background: cyan
+
+  broken_symlink:
+    foreground: background
+    background: red
+
+  missing_symlink_target:
+    foreground: background
+    background: red
+
+  setuid:
+    foreground: background
+    background: purple
+
+  setgid:
+    foreground: background
+    background: purple
+
+  file_with_capability:
+    foreground: red
+
+  sticky_other_writable:
+    foreground: background
+    background: orange
+
+  other_writable:
+    foreground: orange
+
+  sticky:
+    foreground: background
+    background: green
+
+  executable_file:
+    foreground: green
+    font-style: bold
+
+text:
+  special:
+    foreground: background
+    background: orange
+
+  todo:
+    foreground: orange
+    font-style: bold
+
+  licenses:
+    foreground: comment
+
+  configuration:
+    foreground: blue
+
+  other:
+    foreground: yellow
+
+markup:
+  foreground: pink
+
+programming:
+  source:
+    foreground: foreground
+
+  tooling:
+    foreground: blue
+
+  continuous-integration:
+    foreground: purple
+
+media:
+  foreground: hot_pink
+
+office:
+  foreground: blue
+
+archives:
+  foreground: orange
+  font-style: bold
+
+executable:
+  foreground: green
+  font-style: bold
+
+unimportant:
+  foreground: dark_grey

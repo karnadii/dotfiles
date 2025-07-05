@@ -1,0 +1,33 @@
+## Andromeda Theme for Nano
+
+# UI Elements
+set titlecolor brightwhite,blue
+set statuscolor brightwhite,blue
+set errorcolor white,red
+set selectedcolor black,yellow
+set numbercolor yellow
+set keycolor cyan
+set functioncolor green
+
+# Syntax Highlighting
+# General
+color white "^.+$"
+# Keywords
+color purple "\b(break|case|continue|default|do|else|for|if|return|switch|while|echo|exit|function|global|include|new|var|let|const|try|catch|finally|throw|yield|async|await|of|in|is|instanceof|typeof|void|delete|class|extends|super|this|true|false|null|undefined)\b"
+# Strings
+color green ""(\\.|[^"])*""
+color green "'(\\.|[^'])*'"
+# Comments
+color brightblack "#.*$"
+color brightblack "//.*$"
+color brightblack "/\*.*\*/"
+# Numbers
+color yellow "\b([0-9]+)\b"
+# Functions
+color cyan "\b[a-zA-Z_][a-zA-Z0-9_]*\("
+# Types
+color orange "\b(int|char|void|long|float|double|bool|string|array|object)\b"
+# Brackets
+color white "[\(\)\{\}\[\]]"
+# Operators
+color pink "[-+*/%=<>!&|?:-]"
