@@ -1,16 +1,20 @@
-#==============================================================================
-# ZPLUG PLUGIN MANAGER
-#==============================================================================
-
-# Check if zplug is installed, if not, clone it
-if [[ ! -d ~/.zplug ]]; then
-    echo "Installing zplug..."
-    git clone https://github.com/zplug/zplug ~/.zplug
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Initialize zplug
-export ZPLUG_HOME=~/.zplug
-source $ZPLUG_HOME/init.zsh
+### Added by Zinit's installer
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
+fi
+
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
 export SHELL="/bin/zsh"
 export EDITOR="nano"
@@ -19,99 +23,118 @@ export HISTSIZE=10000
 export SAVEHIST=$HISTSIZE
 
 #==============================================================================
-# ALIASES
+# ENHANCED ALIASES
 #==============================================================================
-
-alias rm="rm -v"
-alias cp="cp -v"
-alias mv="mv -v"
-alias ls="ls --color=auto"
+alias rm="rm -iv"               # Interactive verbose removal
+alias cp="cp -iv"               # Interactive verbose copy
+alias mv="mv -iv"               # Interactive verbose move
+alias ls="ls --color=auto --group-directories-first"
+alias ll="ls -lh"               # Detailed list view
+alias la="ls -A"                # Show hidden files
+alias lla="ls -lAh"             # Detailed list view with hidden files
 alias ccat="pygmentize -O style=monokai -f 256 -g"
-alias cat="ccat"
+alias zshrc="${EDITOR} ~/.zshrc" # Quick edit zshrc
+alias reload="source ~/.zshrc"  # Reload zsh config
+alias grep="grep --color=auto"  # Colorized grep
+
+# Directory navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 #------------------------------------------------------------------------------
-# Plugins
+# ENHANCED PLUGINS
 #------------------------------------------------------------------------------
 
-# Theme
-zplug "romkatv/powerlevel10k", as:theme, depth:1
+# Theme (should stay first)
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# Zsh Standard Plugins
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "hlissner/zsh-autopair", defer:2
+# Core utilities
+zinit light zsh-users/zsh-autosuggestions
+zinit ice wait'1' lucid; zinit light zsh-users/zsh-completions
+zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
+zinit light zsh-users/zsh-history-substring-search
+zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
+zinit light hlissner/zsh-autopair
 
-# Oh-My-Zsh Plugins
-zplug "plugins/git", from:oh-my-zsh, if:"(( $+commands[git] ))"
-zplug "plugins/bun", from:oh-my-zsh, if:"(( $+commands[bun] ))"
-zplug "plugins/extract", from:oh-my-zsh
-zplug "plugins/autoenv", from:oh-my-zsh
-zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/copyfile", from:oh-my-zsh
-zplug "plugins/copypath", from:oh-my-zsh
-zplug "plugins/cp", from:oh-my-zsh
-zplug "plugins/dircycle", from:oh-my-zsh
-zplug "plugins/encode64", from:oh-my-zsh
-zplug "plugins/fancy-ctrl-z", from:oh-my-zsh
-zplug "plugins/urltools", from:oh-my-zsh
-zplug "plugins/web-search", from:oh-my-zsh
-zplug "plugins/z", from:oh-my-zsh
-zplug "plugins/node", from:oh-my-zsh, if:"(( $+commands[node] ))"
-zplug "plugins/npm", from:oh-my-zsh, if:"(( $+commands[npm] ))"
-zplug "plugins/nvm", from:oh-my-zsh, if:"(( $+commands[nvm] ))"
-zplug "plugins/pip", from:oh-my-zsh, if:"(( $+commands[pip] ))"
-zplug "plugins/sudo", from:oh-my-zsh, if:"(( $+commands[sudo] ))"
-zplug "plugins/docker", from:oh-my-zsh, if:"(( $+commands[docker] ))"
-zplug "plugins/docker-compose", from:oh-my-zsh, if:"(( $+commands[docker-compose] ))"
-zplug "plugins/dnf", from:oh-my-zsh, if:"(( $+commands[dnf] ))"
-zplug "plugins/flutter", from:oh-my-zsh, if:"(( $+commands[flutter] ))"
-zplug "plugins/golang", from:oh-my-zsh, if:"(( $+commands[go] ))"
-zplug "plugins/ngrok", from:oh-my-zsh, if:"(( $+commands[ngrok] ))"
-zplug "plugins/svn", from:oh-my-zsh, if:"(( $+commands[svn] ))"
+# Productivity boosters
+zinit light junegunn/fzf
+zinit light wfxr/forgit
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light Aloxaf/fzf-tab
+zinit light arzzen/calc.plugin.zsh
 
-# Productivity Tools
-zplug "junegunn/fzf", as:command
-# zplug "wfxr/forgit", from:github
-zplug "arzzen/calc.plugin.zsh"
-zplug "joel-porquet/zsh-dircolors-solarized"
+# Smarter directory jumping
+zinit ice as"command" from"gh-r" mv"zoxide* -> zoxide" pick"zoxide"
+zinit light ajeetdsouza/zoxide
 
+# Oh-My-Zsh Plugins (updated)
+zinit ice if"[ -x "$(command -v git)" ]"; zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice if"[ -x "$(command -v bun)" ]"; zinit snippet OMZ::plugins/bun/bun.plugin.zsh
+zinit snippet OMZ::plugins/extract/extract.plugin.zsh
+zinit snippet OMZ::plugins/history/history.plugin.zsh
+zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
+zinit snippet OMZ::plugins/copyfile/copyfile.plugin.zsh
+zinit snippet OMZ::plugins/copypath/copypath.plugin.zsh
+zinit snippet OMZ::plugins/cp/cp.plugin.zsh
+zinit snippet OMZ::plugins/dircycle/dircycle.plugin.zsh
+zinit snippet OMZ::plugins/encode64/encode64.plugin.zsh
+zinit snippet OMZ::plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh
+zinit snippet OMZ::plugins/urltools/urltools.plugin.zsh
+zinit snippet OMZ::plugins/web-search/web-search.plugin.zsh
+zinit ice if"[ -x "$(command -v node)" ]"; zinit snippet OMZ::plugins/node/node.plugin.zsh
+zinit ice if"[ -x "$(command -v nvm)" ]"; zinit snippet OMZ::plugins/nvm/nvm.plugin.zsh
+zinit ice if"[ -x "$(command -v pip)" ]"; zinit snippet OMZ::plugins/pip/pip.plugin.zsh
+zinit ice if"[ -x "$(command -v sudo)" ]"; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit ice if"[ -x "$(command -v docker)" ]"; zinit snippet OMZ::plugins/docker/docker.plugin.zsh
+zinit ice if"[ -x "$(command -v docker-compose)" ]"; zinit snippet OMZ::plugins/docker-compose/docker-compose.plugin.zsh
+zinit ice if"[ -x "$(command -v dnf)" ]"; zinit snippet OMZ::plugins/dnf/dnf.plugin.zsh
+zinit ice if"[ -x "$(command -v go)" ]"; zinit snippet OMZ::plugins/golang/golang.plugin.zsh
+zinit ice if"[ -x "$(command -v ngrok)" ]"; zinit snippet OMZ::plugins/ngrok/ngrok.plugin.zsh
+zinit ice if"[ -x "$(command -v svn)" ]"; zinit snippet OMZ::plugins/svn/svn.plugin.zsh
+
+# Colored man pages
+zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
+
+# Fast syntax highlighting (should be last)
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Initialize zoxide
+eval "$(zoxide init zsh)"
 
 #==============================================================================
 # SHELL OPTIONS (setopt)
 #==============================================================================
+setopt autocd
+setopt append_history
+setopt auto_list
+setopt auto_menu
+setopt auto_pushd
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_find_no_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt inc_append_history
+setopt interactive_comments
+setopt magic_equal_subst
+setopt no_beep
+setopt no_hist_beep
+setopt no_list_beep
+setopt notify
+setopt print_eight_bit
+setopt print_exit_value
+setopt prompt_subst
+setopt pushd_ignore_dups
+setopt share_history
+setopt transient_rprompt
 
-setopt autocd                   # Change directories without `cd`.
-setopt append_history           # Append to history file.
-setopt auto_list                # Automatically list choices on ambiguous completion.
-setopt auto_menu                # Show completion menu on successive tabs.
-setopt auto_pushd               # Make `cd` push the old directory onto the directory stack.
-setopt extended_history         # Record timestamp and duration of commands.
-setopt hist_expire_dups_first   # Expire duplicate entries first when trimming history.
-setopt hist_find_no_dups        # Don't display duplicates when searching history.
-setopt hist_ignore_all_dups     # Delete old commands if a new one is a duplicate.
-setopt hist_ignore_dups         # Don't record immediate consecutive duplicates.
-setopt hist_ignore_space        # Don't record commands starting with a space.
-setopt hist_reduce_blanks       # Remove superfluous blanks from history items.
-setopt hist_save_no_dups        # Don't write duplicate history entries to the history file.
-setopt inc_append_history       # Write to the history file immediately, not at shell exit.
-setopt interactive_comments     # Allow comments in interactive shell.
-setopt magic_equal_subst        # Perform filename expansion for arguments of the form `foo=bar`.
-setopt no_beep                  # No beeps.
-setopt no_hist_beep             # No beep on history wrap-around.
-setopt no_list_beep             # No beep on ambiguous completion.
-setopt notify                   # Report status of background jobs immediately.
-setopt print_eight_bit          # Print eight-bit characters.
-setopt print_exit_value         # Print exit value of programs with non-zero exit status.
-setopt prompt_subst             # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt.
-setopt pushd_ignore_dups        # Don't push directories that are already on the stack.
-setopt share_history            # Share history between all shells.
-setopt transient_rprompt        # Show a transient rprompt (right prompt).
-
-
-# Common CTRL bindings.
+#==============================================================================
+# ENHANCED KEY BINDINGS
+#==============================================================================
 bindkey "^a" beginning-of-line
 bindkey "^e" end-of-line
 bindkey "^f" forward-word
@@ -123,50 +146,37 @@ bindkey "^w" backward-kill-word
 bindkey "^u" backward-kill-line
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^F" history-incremental-pattern-search-forward
-
-# Do not require a space when attempting to tab-complete.
 bindkey "^i" expand-or-complete-prefix
-#==============================================================================
-# LS_COLORS
-#==============================================================================
 
-# Solarized dircolors
-if [ -x "$(command -v dircolors)" ] && [ -f "$HOME/.zplug/repos/joel-porquet/zsh-dircolors-solarized/dircolors.256dark" ]; then
-    eval "$(dircolors -b $HOME/.zplug/repos/joel-porquet/zsh-dircolors-solarized/dircolors.256dark)"
+# Better history navigation
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+#==============================================================================
+# FZF CONFIGURATION
+#==============================================================================
+# Use fd for better performance
+if command -v fd >/dev/null; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 fi
 
-
-
-
-# Install plugins if they aren't installed
-if ! zplug check; then
-    echo "Some zplug plugins are not installed."
-    printf "Install missing zplug pluginn? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# Load plugins
-zplug load
-
-
+# Apply fzf key bindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 #==============================================================================
 # USER CONFIGURATION
 #==============================================================================
 # asdf
 . "$HOME/.asdf/asdf.sh"
-# append completions to fpath
-export  ASDF_DIR="$HOME/.asdf"
+export ASDF_DIR="$HOME/.asdf"
 fpath=(${ASDF_DIR}/completions $fpath)
-# initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
 # Powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# NVM (Node Version Manager)
+# NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -176,8 +186,9 @@ export PATH=$PATH:/usr/local/go/bin
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 
 # Bun
 export BUN_INSTALL="$HOME/.bun"
