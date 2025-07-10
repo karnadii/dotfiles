@@ -2,7 +2,7 @@
 # Based on https://github.com/EliverLara/Andromeda
 
 colors:
-  # Andromeda Palette
+  # Andromeda Palette - Updated to match nvim theme
   background: '23262E'
   foreground: 'D5CED9'
   comment: 'A0A1A7'
@@ -16,6 +16,24 @@ colors:
   red: 'ee5d43'
   green: '96E072'
   dark_grey: '746f77'
+  # Additional colors from nvim theme
+  darker_black: '1B1D23'
+  black2: '20232A'
+  one_bg: '2e323d'
+  one_bg2: '333844'
+  one_bg3: '3D4352'
+  grey_fg2: 'BAAFC0'
+  light_grey: 'D5CED9'
+  baby_pink: 'ff00aa'
+  vibrant_green: '9BC53D'
+  nord_blue: '3B79C7'
+  sun: 'FF9F2E'
+  dark_purple: 'C668BA'
+  teal: '00e8c6'
+  error: 'FC644D'
+  warning: 'FF9F2E'
+  info: '00b0ff'
+  hint: '5BC0EB'
 
 core:
   normal_text:
@@ -31,109 +49,109 @@ core:
     font-style: bold
 
   symlink:
-    foreground: pink
+    foreground: baby_pink
 
   multi_hard_link:
-    foreground: yellow
+    foreground: sun
 
   fifo:
-    foreground: background
-    background: yellow
+    foreground: darker_black
+    background: warning
 
   socket:
-    foreground: background
-    background: pink
+    foreground: darker_black
+    background: baby_pink
 
   door:
-    foreground: background
-    background: pink
+    foreground: darker_black
+    background: baby_pink
 
   block_device:
-    foreground: background
-    background: yellow
+    foreground: darker_black
+    background: warning
 
   character_device:
-    foreground: background
-    background: cyan
+    foreground: darker_black
+    background: teal
 
   broken_symlink:
-    foreground: background
-    background: red
+    foreground: light_grey
+    background: error
 
   missing_symlink_target:
-    foreground: background
-    background: red
+    foreground: light_grey
+    background: error
 
   setuid:
-    foreground: background
-    background: purple
+    foreground: darker_black
+    background: dark_purple
 
   setgid:
-    foreground: background
-    background: purple
+    foreground: darker_black
+    background: dark_purple
 
   file_with_capability:
-    foreground: red
+    foreground: error
 
   sticky_other_writable:
-    foreground: background
-    background: orange
+    foreground: darker_black
+    background: warning
 
   other_writable:
-    foreground: orange
+    foreground: warning
 
   sticky:
-    foreground: background
-    background: green
+    foreground: darker_black
+    background: vibrant_green
 
   executable_file:
-    foreground: green
+    foreground: vibrant_green
     font-style: bold
 
 text:
   special:
-    foreground: background
-    background: orange
+    foreground: darker_black
+    background: warning
 
   todo:
-    foreground: orange
+    foreground: warning
     font-style: bold
 
   licenses:
-    foreground: comment
+    foreground: grey_fg2
 
   configuration:
-    foreground: blue
+    foreground: info
 
   other:
-    foreground: yellow
+    foreground: sun
 
 markup:
-  foreground: pink
+  foreground: baby_pink
 
 programming:
   source:
-    foreground: foreground
+    foreground: light_grey
 
   tooling:
-    foreground: blue
+    foreground: nord_blue
 
   continuous-integration:
-    foreground: purple
+    foreground: dark_purple
 
 media:
   foreground: hot_pink
 
 office:
-  foreground: blue
+  foreground: info
 
 archives:
-  foreground: orange
+  foreground: warning
   font-style: bold
 
 executable:
-  foreground: green
+  foreground: vibrant_green
   font-style: bold
 
 unimportant:
-  foreground: dark_grey
+  foreground: comment
