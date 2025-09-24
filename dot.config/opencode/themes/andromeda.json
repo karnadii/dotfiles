@@ -1,0 +1,225 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "andromeda_bg": "#23262E",
+    "andromeda_fg": "#D5CED9",
+    "andromeda_accent": "#00e8c6",
+    "andromeda_accent2": "#07d4b6",
+    "andromeda_pink": "#ff00aa",
+    "andromeda_hot_pink": "#f92672",
+    "andromeda_purple": "#c74ded",
+    "andromeda_blue": "#7cb7ff",
+    "andromeda_orange": "#f39c12",
+    "andromeda_yellow": "#FFE66D",
+    "andromeda_red": "#ee5d43",
+    "andromeda_green": "#96E072",
+    "andromeda_gray": "#746f77",
+    "andromeda_gray_light": "#A0A1A7",
+    "andromeda_panel": "#2b303b",
+    "andromeda_border": "#363c49",
+    "andromeda_selection": "#3D4352",
+    "andromeda_line_highlight": "#2e323d"
+  },
+  "theme": {
+    "primary": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "secondary": {
+      "dark": "andromeda_blue",
+      "light": "andromeda_blue"
+    },
+    "accent": {
+      "dark": "andromeda_pink",
+      "light": "andromeda_pink"
+    },
+    "error": {
+      "dark": "andromeda_red",
+      "light": "andromeda_red"
+    },
+    "warning": {
+      "dark": "andromeda_orange",
+      "light": "andromeda_orange"
+    },
+    "success": {
+      "dark": "andromeda_green",
+      "light": "andromeda_green"
+    },
+    "info": {
+      "dark": "andromeda_blue",
+      "light": "andromeda_blue"
+    },
+    "text": {
+      "dark": "andromeda_fg",
+      "light": "andromeda_bg"
+    },
+    "textMuted": {
+      "dark": "andromeda_gray",
+      "light": "andromeda_gray_light"
+    },
+    "background": {
+      "dark": "andromeda_bg",
+      "light": "#f5f5f5"
+    },
+    "backgroundPanel": {
+      "dark": "andromeda_panel",
+      "light": "#e8e8e8"
+    },
+    "backgroundElement": {
+      "dark": "andromeda_panel",
+      "light": "#ffffff"
+    },
+    "border": {
+      "dark": "andromeda_border",
+      "light": "#d0d0d0"
+    },
+    "borderActive": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "borderSubtle": {
+      "dark": "andromeda_gray",
+      "light": "#b0b0b0"
+    },
+    "diffAdded": {
+      "dark": "andromeda_green",
+      "light": "andromeda_green"
+    },
+    "diffRemoved": {
+      "dark": "andromeda_red",
+      "light": "andromeda_red"
+    },
+    "diffContext": {
+      "dark": "andromeda_gray",
+      "light": "andromeda_gray"
+    },
+    "diffHunkHeader": {
+      "dark": "andromeda_purple",
+      "light": "andromeda_purple"
+    },
+    "diffHighlightAdded": {
+      "dark": "andromeda_green",
+      "light": "andromeda_green"
+    },
+    "diffHighlightRemoved": {
+      "dark": "andromeda_red",
+      "light": "andromeda_red"
+    },
+    "diffAddedBg": {
+      "dark": "#2b303b",
+      "light": "#e8f5e8"
+    },
+    "diffRemovedBg": {
+      "dark": "#2b303b",
+      "light": "#ffe8e8"
+    },
+    "diffContextBg": {
+      "dark": "andromeda_panel",
+      "light": "#f0f0f0"
+    },
+    "diffLineNumber": {
+      "dark": "andromeda_gray",
+      "light": "andromeda_gray_light"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "#2b303b",
+      "light": "#e8f5e8"
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "#2b303b",
+      "light": "#ffe8e8"
+    },
+    "markdownText": {
+      "dark": "andromeda_fg",
+      "light": "andromeda_bg"
+    },
+    "markdownHeading": {
+      "dark": "andromeda_pink",
+      "light": "andromeda_pink"
+    },
+    "markdownLink": {
+      "dark": "andromeda_blue",
+      "light": "andromeda_blue"
+    },
+    "markdownLinkText": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "markdownCode": {
+      "dark": "andromeda_green",
+      "light": "andromeda_green"
+    },
+    "markdownBlockQuote": {
+      "dark": "andromeda_gray",
+      "light": "andromeda_gray"
+    },
+    "markdownEmph": {
+      "dark": "andromeda_purple",
+      "light": "andromeda_purple"
+    },
+    "markdownStrong": {
+      "dark": "andromeda_yellow",
+      "light": "andromeda_yellow"
+    },
+    "markdownHorizontalRule": {
+      "dark": "andromeda_gray",
+      "light": "andromeda_gray"
+    },
+    "markdownListItem": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "markdownListEnumeration": {
+      "dark": "andromeda_orange",
+      "light": "andromeda_orange"
+    },
+    "markdownImage": {
+      "dark": "andromeda_blue",
+      "light": "andromeda_blue"
+    },
+    "markdownImageText": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "markdownCodeBlock": {
+      "dark": "andromeda_fg",
+      "light": "andromeda_bg"
+    },
+    "syntaxComment": {
+      "dark": "andromeda_gray_light",
+      "light": "andromeda_gray_light"
+    },
+    "syntaxKeyword": {
+      "dark": "andromeda_purple",
+      "light": "andromeda_purple"
+    },
+    "syntaxFunction": {
+      "dark": "andromeda_yellow",
+      "light": "andromeda_yellow"
+    },
+    "syntaxVariable": {
+      "dark": "andromeda_accent",
+      "light": "andromeda_accent"
+    },
+    "syntaxString": {
+      "dark": "andromeda_green",
+      "light": "andromeda_green"
+    },
+    "syntaxNumber": {
+      "dark": "andromeda_orange",
+      "light": "andromeda_orange"
+    },
+    "syntaxType": {
+      "dark": "andromeda_purple",
+      "light": "andromeda_purple"
+    },
+    "syntaxOperator": {
+      "dark": "andromeda_red",
+      "light": "andromeda_red"
+    },
+    "syntaxPunctuation": {
+      "dark": "andromeda_fg",
+      "light": "andromeda_bg"
+    }
+  }
+}

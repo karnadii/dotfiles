@@ -1,0 +1,90 @@
+theme = "andromeda"
+
+[editor]
+line-number = "relative"
+mouse = true
+middle-click-paste = true
+scroll-lines = 3
+shell = ["zsh", "-c"]
+auto-completion = true
+auto-format = true
+auto-save = false
+completion-trigger-len = 1
+color-modes = true
+true-color = true
+rulers = [80, 120]
+bufferline = "multiple"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+git-ignore = true
+git-global = true
+
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 1
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true
+auto-signature-help = true
+display-signature-help-docs = true
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name", "file-modification-indicator"]
+center = ["version-control", "workspace-diagnostics"]
+right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.whitespace]
+render = "all"
+treatment = "context"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[keys.normal]
+C-s = ":write"
+C-q = ":quit"
+C-w = ":buffer-close"
+C-t = "file_picker"
+C-f = "search"
+C-r = "replace"
+C-n = ":new"
+C-o = ":open"
+C-b = ":buffer-next"
+C-v = ":buffer-previous"
+"ret" = ["move_line_down", "goto_first_nonwhitespace"]
+"tab" = ["move_parent_node_end"]
+"S-tab" = ["move_parent_node_start"]
+"space" = { c = "command_mode", w = ":buffer-close", q = ":quit", Q = ":quit!", s = ":write", S = ":write!", o = ":open", t = "file_picker", f = "search", r = "replace", n = ":new", b = ":buffer-next", v = ":buffer-previous" }
+
+[keys.insert]
+"C-space" = "completion"
+"C-x" = "signature_help"
+"C-s" = ["normal_mode", ":write"]
+"C-q" = ["normal_mode", ":quit"]
+"C-w" = ["normal_mode", ":buffer-close"]
+"C-f" = ["normal_mode", "search"]
+"C-r" = ["normal_mode", "replace"]
+"C-n" = ["normal_mode", ":new"]
+"C-o" = ["normal_mode", ":open"]
+"C-b" = ["normal_mode", ":buffer-next"]
+"C-v" = ["normal_mode", ":buffer-previous"]
+"up" = ["move_line_up", "move_line_up", "move_line_up"]
+"down" = ["move_line_down", "move_line_down", "move_line_down"]
+"left" = ["move_char_left", "move_char_left", "move_char_left"]
+"right" = ["move_char_right", "move_char_right", "move_char_right"]

@@ -1,10 +1,10 @@
 # Set 'nano' as the default command-line text editor.
-export EDITOR="nvim"
+export EDITOR="hx"
 
 # asdf (version manager)
 # It is recommended to use asdf to manage all languages (Node, Python, Go, Bun, etc.)
 export ASDF_DIR="$HOME/.asdf"
-. $HOME/.asdf/asdf.sh
+#. $HOME/.asdf/asdf.sh
 fpath=(${ASDF_DIR}/internal/completions $fpath)
 
 # Local environment settings
@@ -12,4 +12,8 @@ fpath=(${ASDF_DIR}/internal/completions $fpath)
 # This file is not typically checked into version control.
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
+# Dart Pub BIN
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+

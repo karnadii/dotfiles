@@ -1,0 +1,146 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "theme": "andromeda",
+  "mcp": {
+    "memory": {
+      "type": "local",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+    },
+    "calculator": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-calculator"]
+    },
+    "time": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-time"]
+    },
+    "dart": {
+      "type": "local",
+      "command": ["dart", "mcp-server"]
+    },
+    "perplexity-ask": {
+      "type": "local",
+      "command": ["npx", "-y", "server-perplexity-ask"]
+    },
+    "fetch": {
+      "type": "local",
+      "command": ["uvx", "mcp-server-fetch"]
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/home/karnadi/projects"      ]
+    },
+    "context7": {
+      "type": "local",
+      "command": ["npx", "-y", "@upstash/context7-mcp"]
+    },
+    "web-search-prime": {
+      "type": "remote",
+      "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
+      "headers": {
+        "Authorization": "Bearer auth"
+      }
+    },
+    "zai-mcp-server": {
+      "type": "local",
+      "command": ["npx", "-y", "@z_ai/mcp-server"]
+    }
+  },
+  "lsp": {
+    "dart": {
+      "command": ["dart", "language-server"],
+      "extensions": [".dart"]
+    },
+    "typescript-language-server": {
+      "command": ["typescript-language-server", "--stdio"],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".mts",
+        ".cts"
+      ]
+    },
+    "eslint": {
+      "command": ["vscode-eslint-language-server", "--stdio"],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".mts",
+        ".cts",
+        ".vue"
+      ]
+    },
+    "gopls": {
+      "command": ["gopls"],
+      "extensions": [".go"]
+    },
+    "pylsp": {
+      "command": ["pylsp"],
+      "extensions": [".py", ".pyi"]
+    },
+    "taplo": {
+      "command": ["taplo", "lsp", "stdio"],
+      "extensions": [".toml"]
+    },
+    "vscode-json-language-server": {
+      "command": ["vscode-json-languageserver", "--stdio"],
+      "extensions": [".json", ".jsonc"]
+    },
+    "yaml-language-server": {
+      "command": ["yaml-language-server", "--stdio"],
+      "extensions": [".yml", ".yaml"]
+    },
+    "marksman": {
+      "command": ["marksman", "server"],
+      "extensions": [".md", ".markdown", ".mkd"]
+    },
+    "bash-language-server": {
+      "command": ["bash-language-server", "start"],
+      "extensions": [
+        ".sh",
+        ".bash",
+        ".zsh",
+        ".bashrc",
+        ".bash_profile",
+        ".zshrc",
+        ".zprofile",
+        ".profile",
+        ".env"
+      ]
+    },
+    "vscode-html-language-server": {
+      "command": ["vscode-html-language-server", "--stdio"],
+      "extensions": [".html", ".htm"]
+    },
+    "vscode-css-language-server": {
+      "command": ["vscode-css-language-server", "--stdio"],
+      "extensions": [".css", ".scss", ".sass"]
+    }
+  },
+  "formatter": {
+    "dart": {
+      "command": ["dart", "format"],
+      "extensions": [".dart"]
+    }
+  }
+}

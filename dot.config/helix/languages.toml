@@ -1,0 +1,161 @@
+[[language]]
+name = "dart"
+auto-format = true
+language-servers = ["dart"]
+formatter = { command = "dart", args = ["format"] }
+indent = { tab-width = 2, unit = "  " }
+roots = ["pubspec.yaml", "pubspec.yml", "pubspec.lock"]
+
+[[language]]
+name = "typescript"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+indent = { tab-width = 2, unit = "  " }
+roots = ["package.json", "tsconfig.json", "jsconfig.json"]
+
+[[language]]
+name = "javascript"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+indent = { tab-width = 2, unit = "  " }
+roots = ["package.json", "jsconfig.json"]
+
+[[language]]
+name = "go"
+auto-format = true
+language-servers = ["gopls"]
+formatter = { command = "goimports" }
+indent = { tab-width = 4, unit = "\t" }
+roots = ["go.mod", "go.work"]
+
+[[language]]
+name = "python"
+auto-format = true
+language-servers = ["pylsp"]
+formatter = { command = "black" }
+indent = { tab-width = 4, unit = "    " }
+roots = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "poetry.lock"]
+
+[[language]]
+name = "toml"
+scope = "source.toml"
+injection-regex = "toml"
+file-types = ["toml", "Cargo.lock", "Gopkg.lock"]
+roots = []
+comment-token = "#"
+language-servers = ["taplo"]
+auto-format = true
+formatter = { command = "taplo", args = ["format"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "json"
+scope = "source.json"
+injection-regex = "json"
+file-types = ["json", "jsonc"]
+roots = []
+language-servers = ["vscode-json-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "json"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+injection-regex = "yml|yaml"
+file-types = ["yml", "yaml"]
+roots = []
+comment-token = "#"
+language-servers = ["yaml-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown", "mkd"]
+roots = []
+language-servers = ["marksman"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+
+[[language]]
+name = "bash"
+scope = "source.bash"
+injection-regex = "(bash|zsh|sh)"
+file-types = ["sh", "bash", "zsh", ".bashrc", ".bash_profile", ".zshrc", ".zprofile", ".profile", "env"]
+roots = []
+comment-token = "#"
+language-servers = ["bash-language-server"]
+
+[language-server.dart]
+command = "dart"
+args = ["language-server"]
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.gopls]
+command = "gopls"
+
+[language-server.pylsp]
+command = "pylsp"
+
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-languageserver"
+args = ["--stdio"]
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+[language-server.marksman]
+command = "marksman"
+args = ["server"]
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = ["html", "htm"]
+roots = []
+language-servers = ["vscode-html-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "html"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "css"
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css", "scss", "sass"]
+roots = []
+language-servers = ["vscode-css-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "css"] }
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.vscode-html-language-server]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+[language-server.vscode-css-language-server]
+command = "vscode-css-language-server"
+args = ["--stdio"]
