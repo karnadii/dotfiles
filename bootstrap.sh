@@ -31,17 +31,33 @@ done
 # Lock kew state file to prevent theme override on exit.
 chmod 444 "$HOME/.config/kew/kewstaterc"
 
+# ── Agent configs ──
+# Each has its own JSON structure for MCP but shares the same 7 servers.
+
+# OpenCode config
+ln -sf "$PWD/dot.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+
+# Gemini config + theme
+mkdir -p "$HOME/.gemini"
+sed "s|HOME_PLACEHOLDER|$HOME|g" "$PWD/dot.gemini/settings.json" > "$HOME/.gemini/settings.json"
+ln -sf "$HOME/.config/opencode/themes/andromeda.json" "$HOME/.gemini/themes/andromeda.json"
+
+# Claude config + theme
+mkdir -p "$HOME/.claude"
+ln -sf "$PWD/dot.claude/settings.json" "$HOME/.claude/settings.json"
+ln -sf "$HOME/.config/opencode/themes/andromeda.json" "$HOME/.claude/themes/andromeda.json"
+
 # Agent rules (shared across opencode, gemini, claude)
-rm -rf "$HOME/.agents/AGENTS.md"
+mkdir -p "$HOME/.agents"
 ln -sf "$PWD/dot.agents/AGENTS.md" "$HOME/.agents/AGENTS.md"
 
-# OpenCode — symlink AGENTS.md to central source
+# OpenCode — symlink AGENTS.md
 ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
 
-# Gemini — symlink GEMINI.md to central source
+# Gemini — symlink GEMINI.md
 ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.gemini/GEMINI.md"
 
-# Claude rules — symlink AGENTS.md to central source
+# Claude rules — symlink AGENTS.md + other rules
 mkdir -p "$HOME/.claude/rules"
 ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.claude/rules/AGENTS.md"
 for f in "$PWD/dot.claude/rules"/*.md; do
@@ -59,4 +75,6 @@ ln -sf "$HOME/.agents/skills" "$HOME/.gemini/skills"
 rm -rf "$HOME/.claude/skills"
 ln -sf "$HOME/.agents/skills" "$HOME/.claude/skills"
 
-echo "==> Dotfiles installed! Run 'reload' or 'exec zsh' to apply."
+echo "==> Dotfiles installed!"
+echo "    Set your API key in ~/.config/opencode/opencode.json (look for YOUR_API_KEY)"
+echo "    Run 'reload' or 'exec zsh' to apply."

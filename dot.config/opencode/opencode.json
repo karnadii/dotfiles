@@ -3,12 +3,11 @@
   "model": "agentrouter/glm-5.1",
   "small_model": "agentrouter/glm-4.6",
   "mcp": {
-    "memory": {
+    "dart": {
       "type": "local",
       "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-memory"
+        "dart",
+        "mcp-server"
       ],
       "enabled": true
     },
@@ -28,14 +27,6 @@
       ],
       "enabled": true
     },
-    "dart": {
-      "type": "local",
-      "command": [
-        "dart",
-        "mcp-server"
-      ],
-      "enabled": true
-    },
     "fetch": {
       "type": "local",
       "command": [
@@ -50,6 +41,15 @@
         "npx",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "enabled": true
+    },
+    "memory": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
       ],
       "enabled": true
     },
@@ -371,7 +371,8 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "agentrouter",
       "options": {
-        "baseURL": "https://agentrouter.org/v1"
+        "baseURL": "https://agentrouter.org/v1",
+        "apiKey": "YOUR_API_KEY"
       },
       "models": {
         "glm-5.1": {
