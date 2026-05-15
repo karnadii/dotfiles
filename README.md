@@ -117,8 +117,7 @@ dotfiles/
 
 ## API keys
 
-The dotfiles repo uses `YOUR_API_KEY` placeholders. Set your actual keys locally:
+Set your API keys via environment variables (not tracked):
 
-- `~/.zshenv` → export your API keys here
-- `~/.config/opencode/opencode.json` → replace `YOUR_API_KEY` in the provider section
-- `~/.local/bin/env` → sourced by `.zshenv` for private vars (not tracked)
+- `~/.zshenv` → export keys for agentrouter, deepseek, zhipu, ollama, etc.
+- `~/.local/bin/env` → sourced by `.zshenv`, ideal for private vars (not tracked)

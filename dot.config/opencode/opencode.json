@@ -365,38 +365,5 @@
         ".toml"
       ]
     }
-  },
-  "provider": {
-    "agentrouter": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "agentrouter",
-      "options": {
-        "baseURL": "https://agentrouter.org/v1",
-        "apiKey": "YOUR_API_KEY"
-      },
-      "models": {
-        "glm-5.1": {
-          "name": "glm-5.1",
-          "limit": {
-            "context": 200000,
-            "output": 65536
-          }
-        },
-        "deepseek-v4-pro": {
-          "name": "deepseek-v4-pro",
-          "limit": {
-            "context": 1000000,
-            "output": 384000
-          }
-        },
-        "deepseek-v4-flash": {
-          "name": "deepseek-v4-flash",
-          "limit": {
-            "context": 1000000,
-            "output": 384000
-          }
-        }
-      }
-    }
   }
 }
