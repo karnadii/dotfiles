@@ -50,7 +50,10 @@
         "-y",
         "@upstash/context7-mcp"
       ],
-      "timeout": 60000
+      "timeout": 60000,
+      "env": {
+        "CONTEXT7_API_KEY": "YOUR_API_KEY"
+      }
     }
   },
   "security": {
