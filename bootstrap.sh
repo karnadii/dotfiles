@@ -37,15 +37,15 @@ chmod 444 "$HOME/.config/kew/kewstaterc"
 # OpenCode config
 ln -sf "$PWD/dot.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
 
-# Gemini config + theme
+# Gemini config + theme (Gemini-native format)
 mkdir -p "$HOME/.gemini"
 sed "s|HOME_PLACEHOLDER|$HOME|g" "$PWD/dot.gemini/settings.json" > "$HOME/.gemini/settings.json"
-ln -sf "$HOME/.config/opencode/themes/andromeda.json" "$HOME/.gemini/themes/andromeda.json"
+cp "$PWD/dot.gemini/themes/andromeda.json" "$HOME/.gemini/themes/andromeda.json"
 
-# Claude config + theme
+# Claude config + theme (Claude-native format)
 mkdir -p "$HOME/.claude"
 ln -sf "$PWD/dot.claude/settings.json" "$HOME/.claude/settings.json"
-ln -sf "$HOME/.config/opencode/themes/andromeda.json" "$HOME/.claude/themes/andromeda.json"
+cp "$PWD/dot.claude/themes/andromeda.json" "$HOME/.claude/themes/andromeda.json"
 
 # Agent rules (shared across opencode, gemini, claude)
 mkdir -p "$HOME/.agents"

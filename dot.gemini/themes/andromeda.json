@@ -1,0 +1,32 @@
+{
+  "name": "Andromeda",
+  "type": "custom",
+  "background": {
+    "primary": "#23262E",
+    "diff": {
+      "added": "#2b303b",
+      "removed": "#2b303b"
+    }
+  },
+  "text": {
+    "primary": "#D5CED9",
+    "secondary": "#746f77",
+    "link": "#7cb7ff",
+    "accent": "#00e8c6",
+    "response": "#D5CED9"
+  },
+  "border": {
+    "default": "#363c49",
+    "focused": "#00e8c6"
+  },
+  "status": {
+    "success": "#96E072",
+    "warning": "#f39c12",
+    "error": "#ee5d43"
+  },
+  "ui": {
+    "comment": "#A0A1A7",
+    "symbol": "#ee5d43",
+    "gradient": ["#00e8c6", "#c74ded", "#ff00aa"]
+  }
+}
