@@ -28,6 +28,9 @@ for dir in "$PWD/dot.config"/*/; do
   ln -sf "$dir" "$target"
 done
 
+# Lock kew state file to prevent theme override on exit.
+chmod 444 "$HOME/.config/kew/kewstaterc"
+
 # Agent rules (shared across opencode, gemini, claude)
 rm -rf "$HOME/.agents/AGENTS.md"
 ln -sf "$PWD/dot.agents/AGENTS.md" "$HOME/.agents/AGENTS.md"
