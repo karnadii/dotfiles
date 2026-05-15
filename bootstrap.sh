@@ -28,9 +28,21 @@ for dir in "$PWD/dot.config"/*/; do
   ln -sf "$dir" "$target"
 done
 
-# Claude rules
+# Agent rules (shared across opencode, gemini, claude)
+rm -rf "$HOME/.agents/AGENTS.md"
+ln -sf "$PWD/dot.agents/AGENTS.md" "$HOME/.agents/AGENTS.md"
+
+# OpenCode — symlink AGENTS.md to central source
+ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.config/opencode/AGENTS.md"
+
+# Gemini — symlink GEMINI.md to central source
+ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.gemini/GEMINI.md"
+
+# Claude rules — symlink AGENTS.md to central source
 mkdir -p "$HOME/.claude/rules"
+ln -sf "$HOME/.agents/AGENTS.md" "$HOME/.claude/rules/AGENTS.md"
 for f in "$PWD/dot.claude/rules"/*.md; do
+  [ "$(basename "$f")" = "AGENTS.md" ] && continue
   ln -sf "$f" "$HOME/.claude/rules/$(basename "$f")"
 done
 
@@ -43,8 +55,5 @@ rm -rf "$HOME/.gemini/skills"
 ln -sf "$HOME/.agents/skills" "$HOME/.gemini/skills"
 rm -rf "$HOME/.claude/skills"
 ln -sf "$HOME/.agents/skills" "$HOME/.claude/skills"
-
-# Gemini GEMINI.md
-ln -sf "$PWD/dot.gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
 
 echo "==> Dotfiles installed! Run 'reload' or 'exec zsh' to apply."
