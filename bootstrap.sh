@@ -34,4 +34,17 @@ for f in "$PWD/dot.claude/rules"/*.md; do
   ln -sf "$f" "$HOME/.claude/rules/$(basename "$f")"
 done
 
+# Agent skills (shared across opencode, gemini, claude)
+rm -rf "$HOME/.agents/skills"
+ln -sf "$PWD/dot.agents/skills" "$HOME/.agents/skills"
+
+# Symlink gemini & claude skills to shared source
+rm -rf "$HOME/.gemini/skills"
+ln -sf "$HOME/.agents/skills" "$HOME/.gemini/skills"
+rm -rf "$HOME/.claude/skills"
+ln -sf "$HOME/.agents/skills" "$HOME/.claude/skills"
+
+# Gemini GEMINI.md
+ln -sf "$PWD/dot.gemini/GEMINI.md" "$HOME/.gemini/GEMINI.md"
+
 echo "==> Dotfiles installed! Run 'reload' or 'exec zsh' to apply."
