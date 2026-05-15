@@ -1,30 +1,48 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "andromeda",
+  "model": "agentrouter/glm-5.1",
+  "small_model": "agentrouter/glm-4.6",
   "mcp": {
     "memory": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-memory"]
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "enabled": true
     },
     "calculator": {
       "type": "local",
-      "command": ["uvx", "mcp-server-calculator"]
+      "command": [
+        "uvx",
+        "mcp-server-calculator"
+      ],
+      "enabled": true
     },
     "time": {
       "type": "local",
-      "command": ["uvx", "mcp-server-time"]
+      "command": [
+        "uvx",
+        "mcp-server-time"
+      ],
+      "enabled": true
     },
     "dart": {
       "type": "local",
-      "command": ["dart", "mcp-server"]
-    },
-    "perplexity-ask": {
-      "type": "local",
-      "command": ["npx", "-y", "server-perplexity-ask"]
+      "command": [
+        "dart",
+        "mcp-server"
+      ],
+      "enabled": true
     },
     "fetch": {
       "type": "local",
-      "command": ["uvx", "mcp-server-fetch"]
+      "command": [
+        "uvx",
+        "mcp-server-fetch"
+      ],
+      "enabled": true
     },
     "sequential-thinking": {
       "type": "local",
@@ -32,39 +50,34 @@
         "npx",
         "-y",
         "@modelcontextprotocol/server-sequential-thinking"
-      ]
+      ],
+      "enabled": true
     },
-    "filesystem": {
+    "context7": {
       "type": "local",
       "command": [
         "npx",
         "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/home/karnadi/projects"      ]
-    },
-    "context7": {
-      "type": "local",
-      "command": ["npx", "-y", "@upstash/context7-mcp"]
-    },
-    "web-search-prime": {
-      "type": "remote",
-      "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
-      "headers": {
-        "Authorization": "Bearer auth"
-      }
-    },
-    "zai-mcp-server": {
-      "type": "local",
-      "command": ["npx", "-y", "@z_ai/mcp-server"]
+        "@upstash/context7-mcp"
+      ],
+      "enabled": true
     }
   },
   "lsp": {
     "dart": {
-      "command": ["dart", "language-server"],
-      "extensions": [".dart"]
+      "command": [
+        "dart",
+        "language-server"
+      ],
+      "extensions": [
+        ".dart"
+      ]
     },
     "typescript-language-server": {
-      "command": ["typescript-language-server", "--stdio"],
+      "command": [
+        "typescript-language-server",
+        "--stdio"
+      ],
       "extensions": [
         ".ts",
         ".tsx",
@@ -77,7 +90,10 @@
       ]
     },
     "eslint": {
-      "command": ["vscode-eslint-language-server", "--stdio"],
+      "command": [
+        "vscode-eslint-language-server",
+        "--stdio"
+      ],
       "extensions": [
         ".ts",
         ".tsx",
@@ -91,31 +107,68 @@
       ]
     },
     "gopls": {
-      "command": ["gopls"],
-      "extensions": [".go"]
+      "command": [
+        "gopls"
+      ],
+      "extensions": [
+        ".go"
+      ]
     },
     "pylsp": {
-      "command": ["pylsp"],
-      "extensions": [".py", ".pyi"]
+      "command": [
+        "pylsp"
+      ],
+      "extensions": [
+        ".py",
+        ".pyi"
+      ]
     },
     "taplo": {
-      "command": ["taplo", "lsp", "stdio"],
-      "extensions": [".toml"]
+      "command": [
+        "taplo",
+        "lsp",
+        "stdio"
+      ],
+      "extensions": [
+        ".toml"
+      ]
     },
     "vscode-json-language-server": {
-      "command": ["vscode-json-languageserver", "--stdio"],
-      "extensions": [".json", ".jsonc"]
+      "command": [
+        "vscode-json-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".json",
+        ".jsonc"
+      ]
     },
     "yaml-language-server": {
-      "command": ["yaml-language-server", "--stdio"],
-      "extensions": [".yml", ".yaml"]
+      "command": [
+        "yaml-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".yml",
+        ".yaml"
+      ]
     },
     "marksman": {
-      "command": ["marksman", "server"],
-      "extensions": [".md", ".markdown", ".mkd"]
+      "command": [
+        "vscode-markdown-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".md",
+        ".markdown",
+        ".mkd"
+      ]
     },
     "bash-language-server": {
-      "command": ["bash-language-server", "start"],
+      "command": [
+        "/home/karnadi/.bun/bin/bash-language-server",
+        "start"
+      ],
       "extensions": [
         ".sh",
         ".bash",
@@ -129,18 +182,221 @@
       ]
     },
     "vscode-html-language-server": {
-      "command": ["vscode-html-language-server", "--stdio"],
-      "extensions": [".html", ".htm"]
+      "command": [
+        "vscode-html-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".html",
+        ".htm"
+      ]
     },
     "vscode-css-language-server": {
-      "command": ["vscode-css-language-server", "--stdio"],
-      "extensions": [".css", ".scss", ".sass"]
+      "command": [
+        "vscode-css-language-server",
+        "--stdio"
+      ],
+      "extensions": [
+        ".css",
+        ".scss",
+        ".sass"
+      ]
+    },
+    "rust-analyzer": {
+      "command": [
+        "rust-analyzer"
+      ],
+      "extensions": [
+        ".rs"
+      ]
     }
   },
   "formatter": {
     "dart": {
-      "command": ["dart", "format"],
-      "extensions": [".dart"]
+      "command": [
+        "dart",
+        "format"
+      ],
+      "extensions": [
+        ".dart"
+      ]
+    },
+    "prettier-ts": {
+      "command": [
+        "prettier",
+        "--parser",
+        "typescript"
+      ],
+      "extensions": [
+        ".ts"
+      ]
+    },
+    "prettier-tsx": {
+      "command": [
+        "prettier",
+        "--parser",
+        "typescript"
+      ],
+      "extensions": [
+        ".tsx"
+      ]
+    },
+    "prettier-js": {
+      "command": [
+        "prettier",
+        "--parser",
+        "babel"
+      ],
+      "extensions": [
+        ".js"
+      ]
+    },
+    "prettier-jsx": {
+      "command": [
+        "prettier",
+        "--parser",
+        "babel"
+      ],
+      "extensions": [
+        ".jsx"
+      ]
+    },
+    "prettier-json": {
+      "command": [
+        "prettier",
+        "--parser",
+        "json"
+      ],
+      "extensions": [
+        ".json",
+        ".jsonc"
+      ]
+    },
+    "prettier-yaml": {
+      "command": [
+        "prettier",
+        "--parser",
+        "yaml"
+      ],
+      "extensions": [
+        ".yml",
+        ".yaml"
+      ]
+    },
+    "prettier-html": {
+      "command": [
+        "prettier",
+        "--parser",
+        "html"
+      ],
+      "extensions": [
+        ".html",
+        ".htm"
+      ]
+    },
+    "prettier-css": {
+      "command": [
+        "prettier",
+        "--parser",
+        "css"
+      ],
+      "extensions": [
+        ".css"
+      ]
+    },
+    "prettier-scss": {
+      "command": [
+        "prettier",
+        "--parser",
+        "scss"
+      ],
+      "extensions": [
+        ".scss",
+        ".sass"
+      ]
+    },
+    "prettier-md": {
+      "command": [
+        "prettier",
+        "--parser",
+        "markdown"
+      ],
+      "extensions": [
+        ".md",
+        ".markdown"
+      ]
+    },
+    "black": {
+      "command": [
+        "black",
+        "--quiet",
+        "--stdin-filename",
+        "$FILE"
+      ],
+      "extensions": [
+        ".py"
+      ]
+    },
+    "goimports": {
+      "command": [
+        "goimports",
+        "-w"
+      ],
+      "extensions": [
+        ".go"
+      ]
+    },
+    "rustfmt": {
+      "command": [
+        "rustfmt",
+        "--edition",
+        "2024"
+      ],
+      "extensions": [
+        ".rs"
+      ]
+    },
+    "taplo": {
+      "command": [
+        "taplo",
+        "format"
+      ],
+      "extensions": [
+        ".toml"
+      ]
+    }
+  },
+  "provider": {
+    "agentrouter": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "agentrouter",
+      "options": {
+        "baseURL": "https://agentrouter.org/v1",
+        "apiKey": "sk-Cw5SYVGmtWfAq0F63n2NKBxqmIylLsogxGM9FGjOpcmUBGNe"
+      },
+      "models": {
+        "glm-5.1": {
+          "name": "glm-5.1",
+          "limit": {
+            "context": 200000,
+            "output": 65536
+          }
+        },
+        "deepseek-v4-pro": {
+          "name": "deepseek-v4-pro",
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
+        },
+        "deepseek-v4-flash": {
+          "name": "deepseek-v4-flash",
+          "limit": {
+            "context": 1000000,
+            "output": 384000
+          }
+        }
+      }
     }
   }
 }

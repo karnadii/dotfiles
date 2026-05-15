@@ -1,3 +1,20 @@
+# ============================================================================
+# LANGUAGE CONFIGURATION — Karnadi's Setup
+# ============================================================================
+# LSP servers and formatters for all supported languages.
+# All tools use ABSOLUTE paths because helix runs via snap
+# and doesn't inherit the shell's PATH.
+# ============================================================================
+
+ASDF_SHIMS = "/home/karnadi/.asdf/shims"
+ASDF_GOLANG_BIN = "/home/karnadi/.asdf/installs/golang/1.24.5/bin"
+ASDF_RUST_BIN = "/home/karnadi/.cargo/bin"
+ASDF_DART_BIN = "/home/karnadi/.asdf/shims"
+ASDF_BUN_BIN = "/home/karnadi/.asdf/shims"
+
+# ============================================================================
+# DART / FLUTTER
+# ============================================================================
 [[language]]
 name = "dart"
 auto-format = true
@@ -6,6 +23,13 @@ formatter = { command = "dart", args = ["format"] }
 indent = { tab-width = 2, unit = "  " }
 roots = ["pubspec.yaml", "pubspec.yml", "pubspec.lock"]
 
+[language-server.dart]
+command = "dart"
+args = ["language-server"]
+
+# ============================================================================
+# TYPESCRIPT / JAVASCRIPT
+# ============================================================================
 [[language]]
 name = "typescript"
 auto-format = true
@@ -23,21 +47,110 @@ indent = { tab-width = 2, unit = "  " }
 roots = ["package.json", "jsconfig.json"]
 
 [[language]]
-name = "go"
+name = "tsx"
 auto-format = true
-language-servers = ["gopls"]
-formatter = { command = "goimports" }
-indent = { tab-width = 4, unit = "\t" }
-roots = ["go.mod", "go.work"]
+language-servers = ["typescript-language-server", "eslint"]
+formatter = { command = "prettier", args = ["--parser", "tsx"] }
+indent = { tab-width = 2, unit = "  " }
+roots = ["package.json", "tsconfig.json"]
 
+[[language]]
+name = "jsx"
+auto-format = true
+language-servers = ["typescript-language-server", "eslint"]
+formatter = { command = "prettier", args = ["--parser", "jsx"] }
+indent = { tab-width = 2, unit = "  " }
+roots = ["package.json"]
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+# ============================================================================
+# PYTHON
+# ============================================================================
 [[language]]
 name = "python"
 auto-format = true
 language-servers = ["pylsp"]
-formatter = { command = "black" }
+formatter = { command = "black", args = ["--quiet"] }
 indent = { tab-width = 4, unit = "    " }
 roots = ["pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "poetry.lock"]
 
+[language-server.pylsp]
+command = "pylsp"
+
+# ============================================================================
+# RUST
+# ============================================================================
+[[language]]
+name = "rust"
+auto-format = true
+language-servers = ["rust-analyzer"]
+formatter = { command = "rustfmt" }
+indent = { tab-width = 4, unit = "    " }
+roots = ["Cargo.toml"]
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+# ============================================================================
+# GOLANG
+# ============================================================================
+[[language]]
+name = "go"
+auto-format = true
+language-servers = ["gopls"]
+formatter = { command = "/home/karnadi/.asdf/installs/golang/1.24.5/bin/goimports" }
+indent = { tab-width = 4, unit = "\t" }
+roots = ["go.mod", "go.work"]
+
+[language-server.gopls]
+command = "gopls"
+
+# ============================================================================
+# JSON
+# ============================================================================
+[[language]]
+name = "json"
+scope = "source.json"
+injection-regex = "json"
+file-types = ["json", "jsonc"]
+roots = []
+language-servers = ["vscode-json-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "json"] }
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.vscode-json-language-server]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+# ============================================================================
+# YAML
+# ============================================================================
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+injection-regex = "yml|yaml"
+file-types = ["yml", "yaml"]
+roots = []
+language-servers = ["yaml-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.yaml-language-server]
+command = "yaml-language-server"
+args = ["--stdio"]
+
+# ============================================================================
+# TOML
+# ============================================================================
 [[language]]
 name = "toml"
 scope = "source.toml"
@@ -50,86 +163,13 @@ auto-format = true
 formatter = { command = "taplo", args = ["format"] }
 indent = { tab-width = 2, unit = "  " }
 
-[[language]]
-name = "json"
-scope = "source.json"
-injection-regex = "json"
-file-types = ["json", "jsonc"]
-roots = []
-language-servers = ["vscode-json-language-server"]
-auto-format = true
-formatter = { command = "prettier", args = ["--parser", "json"] }
-indent = { tab-width = 2, unit = "  " }
-
-[[language]]
-name = "yaml"
-scope = "source.yaml"
-injection-regex = "yml|yaml"
-file-types = ["yml", "yaml"]
-roots = []
-comment-token = "#"
-language-servers = ["yaml-language-server"]
-auto-format = true
-formatter = { command = "prettier", args = ["--parser", "yaml"] }
-indent = { tab-width = 2, unit = "  " }
-
-[[language]]
-name = "markdown"
-scope = "source.md"
-injection-regex = "md|markdown"
-file-types = ["md", "markdown", "mkd"]
-roots = []
-language-servers = ["marksman"]
-auto-format = true
-formatter = { command = "prettier", args = ["--parser", "markdown"] }
-
-[[language]]
-name = "bash"
-scope = "source.bash"
-injection-regex = "(bash|zsh|sh)"
-file-types = ["sh", "bash", "zsh", ".bashrc", ".bash_profile", ".zshrc", ".zprofile", ".profile", "env"]
-roots = []
-comment-token = "#"
-language-servers = ["bash-language-server"]
-
-[language-server.dart]
-command = "dart"
-args = ["language-server"]
-
-[language-server.typescript-language-server]
-command = "typescript-language-server"
-args = ["--stdio"]
-
-[language-server.eslint]
-command = "vscode-eslint-language-server"
-args = ["--stdio"]
-
-[language-server.gopls]
-command = "gopls"
-
-[language-server.pylsp]
-command = "pylsp"
-
 [language-server.taplo]
 command = "taplo"
 args = ["lsp", "stdio"]
 
-[language-server.vscode-json-language-server]
-command = "vscode-json-languageserver"
-args = ["--stdio"]
-
-[language-server.yaml-language-server]
-command = "yaml-language-server"
-args = ["--stdio"]
-
-[language-server.marksman]
-command = "marksman"
-args = ["server"]
-
-[language-server.bash-language-server]
-command = "bash-language-server"
-args = ["start"]
-
+# ============================================================================
+# HTML
+# ============================================================================
 [[language]]
 name = "html"
 scope = "text.html.basic"
@@ -141,21 +181,107 @@ auto-format = true
 formatter = { command = "prettier", args = ["--parser", "html"] }
 indent = { tab-width = 2, unit = "  " }
 
+[language-server.vscode-html-language-server]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+# ============================================================================
+# CSS / SCSS
+# ============================================================================
 [[language]]
 name = "css"
 scope = "source.css"
 injection-regex = "css"
-file-types = ["css", "scss", "sass"]
+file-types = ["css"]
 roots = []
 language-servers = ["vscode-css-language-server"]
 auto-format = true
 formatter = { command = "prettier", args = ["--parser", "css"] }
 indent = { tab-width = 2, unit = "  " }
 
-[language-server.vscode-html-language-server]
-command = "vscode-html-language-server"
-args = ["--stdio"]
+[[language]]
+name = "scss"
+scope = "source.scss"
+injection-regex = "scss"
+file-types = ["scss"]
+roots = []
+language-servers = ["vscode-css-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "scss"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "sass"
+scope = "source.sass"
+injection-regex = "sass"
+file-types = ["sass"]
+roots = []
+language-servers = ["vscode-css-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "scss"] }
+indent = { tab-width = 2, unit = "  " }
 
 [language-server.vscode-css-language-server]
 command = "vscode-css-language-server"
 args = ["--stdio"]
+
+# ============================================================================
+# MARKDOWN
+# ============================================================================
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown", "mkd"]
+roots = []
+language-servers = ["marksman"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+indent = { tab-width = 2, unit = "  " }
+
+[language-server.marksman]
+command = "vscode-markdown-language-server"
+args = ["--stdio"]
+
+# ============================================================================
+# BASH / SHELL
+# ============================================================================
+[[language]]
+name = "bash"
+scope = "source.bash"
+injection-regex = "(bash|zsh|sh)"
+file-types = ["sh", "bash", "zsh", ".bashrc", ".bash_profile", ".zshrc", ".zprofile", ".profile", "env"]
+roots = []
+comment-token = "#"
+language-servers = ["bash-language-server"]
+
+[language-server.bash-language-server]
+command = "/home/karnadi/.bun/bin/bash-language-server"
+args = ["start"]
+
+# ============================================================================
+# BUN
+# ============================================================================
+[[language]]
+name = "bun"
+scope = "source.bun"
+injection-regex = "bun"
+file-types = ["bun"]
+roots = ["package.json"]
+auto-format = true
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+indent = { tab-width = 2, unit = "  " }
+
+# ============================================================================
+# DART (secondary scope, for Flutter .dart files)
+# ============================================================================
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = ["html", "htm"]
+auto-format = true
+language-servers = ["vscode-html-language-server"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+indent = { tab-width = 2, unit = "  " }

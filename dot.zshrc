@@ -50,20 +50,26 @@ alias mv="mv -iv"
 alias vim="nvim"
 alias vi="nvim"
 # Replace standard commands with modern, better alternatives.
-alias ls="eza --color=auto --group-directories-first"  # Use 'eza' for listings.
-alias cat="bat --theme=andromeda"                      # Use 'bat' for viewing files with syntax highlighting.
-alias grep="rg"                                        # Use 'ripgrep' (rg) for faster, better searching.
-
+#DISABLED: alias ls="eza --color=auto --group-directories-first"  # Use 'eza' for listings.
+#DISABLED: alias cat="bat --theme=andromeda"                      # Use 'bat' for viewing files with syntax highlighting.
+#DISABLED: alias grep="rg"                                        # Use 'ripgrep' (rg) for faster, better searching.
+alias vm="asdf" # version manager
+alias vml="vm list"
+alias vms="vm set"
+alias vmpa="vm plugin add"
+alias vmpl="vm plugin list"
+alias vmi="vm install"
 # Common 'ls' (eza) shortcuts.
-alias ll="ls -lh"      # Detailed list view (long, human-readable).
-alias la="ls -a"       # Show hidden files (dotfiles).
-alias lla="ls -lah"    # Detailed list view with hidden files.
-alias lt="ls --tree"   # Tree view of the current directory.
-alias ltr="ls --tree -L 2" # Tree view limited to 2 levels deep.
+alias ll="eza -lh --group-directories-first"      # Detailed list view (long, human-readable).
+alias bat="bat --theme=andromeda --paging=never"
+alias la="eza -a --group-directories-first"       # Show hidden files (dotfiles).
+alias lla="eza -lah --group-directories-first"    # Detailed list view with hidden files.
+alias lt="eza --tree --group-directories-first"   # Tree view of the current directory.
+alias ltr="eza --tree -L 2 --group-directories-first" # Tree view limited to 2 levels deep.
 
 # Convenience aliases.
 alias zshrc="${EDITOR} ~/.zshrc" # Quickly open this file for editing.
-alias reload="source ~/.zshrc"  # Quickly apply changes to this file.
+alias reload="exec zsh"  # Quickly apply changes with a fresh shell.
 
 # Directory navigation shortcuts.
 # alias ..="cd .." # Not needed; handled by the 'autocd' option.
@@ -101,6 +107,7 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 # --- Core Shell Utilities ---
 # Fish-like autosuggestions based on command history.
 zinit light zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#746f77"
 # Advanced tab completions for many common commands.
 # `ice wait'1' lucid` loads the plugin after a 1-second delay without printing messages.
 zinit ice wait'1' lucid; zinit light zsh-users/zsh-completions
@@ -108,8 +115,7 @@ zinit ice wait'1' lucid; zinit light zsh-users/zsh-completions
 zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
 zinit light zsh-users/zsh-history-substring-search
 # Automatically adds closing brackets, quotes, etc.
-zinit ice wait'1' lucid atload"zicompinit; zicdreplay"
-zinit light hlissner/zsh-autopair
+zinit ice wait'1' lucid; zinit light hlissner/zsh-autopair
 
 # --- Productivity Boosters ---
 zinit light junegunn/fzf                     # A command-line fuzzy finder.
@@ -137,8 +143,8 @@ zinit light ajeetdsouza/zoxide
 # --- Oh-My-Zsh (OMZ) Plugins ---
 # Zinit can load OMZ plugins without needing the full framework.
 # `ice if"[...` only loads the plugin if the specified command exists.
-zinit ice if"[ -x "$(command -v git)" ]"; zinit snippet OMZ::plugins/git/git.plugin.zsh
-zinit ice if"[ -x "$(command -v bun)" ]"; zinit snippet OMZ::plugins/bun/bun.plugin.zsh
+zinit ice if"[ -x \"$(command -v git)\" ]"; zinit snippet OMZ::plugins/git/git.plugin.zsh
+zinit ice if"[ -x \"$(command -v bun)\" ]"; zinit snippet OMZ::plugins/bun/bun.plugin.zsh
 zinit snippet OMZ::plugins/extract/extract.plugin.zsh # 'extract' any archive type.
 zinit snippet OMZ::plugins/history/history.plugin.zsh # `h` for history search.
 zinit snippet OMZ::plugins/command-not-found/command-not-found.plugin.zsh
@@ -151,22 +157,25 @@ zinit snippet OMZ::plugins/fancy-ctrl-z/fancy-ctrl-z.plugin.zsh # Better Ctrl+Z 
 zinit snippet OMZ::plugins/urltools/urltools.plugin.zsh # URL encoding/decoding.
 # zinit snippet OMZ::plugins/web-search/web-search.plugin.zsh # e.g., 'google something'. # BROKEN TOOLS
 zinit snippet OMZ::plugins/asdf/asdf.plugin.zsh
-zinit ice if"[ -x "$(command -v node)" ]"; zinit snippet OMZ::plugins/node/node.plugin.zsh
-zinit ice if"[ -x "$(command -v nvm)" ]"; zinit snippet OMZ::plugins/nvm/nvm.plugin.zsh
-zinit ice if"[ -x "$(command -v pip)" ]"; zinit snippet OMZ::plugins/pip/pip.plugin.zsh
-zinit ice if"[ -x "$(command -v sudo)" ]"; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
-zinit ice if"[ -x "$(command -v docker)" ]"; zinit snippet OMZ::plugins/docker/docker.plugin.zsh
-zinit ice if"[ -x "$(command -v docker-compose)" ]"; zinit snippet OMZ::plugins/docker-compose/docker-compose.plugin.zsh
-zinit ice if"[ -x "$(command -v go)" ]"; zinit snippet OMZ::plugins/golang/golang.plugin.zsh
-zinit ice if"[ -x "$(command -v ngrok)" ]"; zinit snippet OMZ::plugins/ngrok/ngrok.plugin.zsh
-zinit ice if"[ -x "$(command -v svn)" ]"; zinit snippet OMZ::plugins/svn/svn.plugin.zsh
-zinit ice if"[ -x "$(command -v brew)" ]"; zinit snippet OMZ::plugins/brew/brew.plugin.zsh
+zinit ice if"[ -x \"$(command -v node)\" ]"; zinit snippet OMZ::plugins/node/node.plugin.zsh
+# zinit ice if"[ -x \"$(command -v nvm)\" ]"; zinit snippet OMZ::plugins/nvm/nvm.plugin.zsh
+zinit ice if"[ -x \"$(command -v pip)\" ]"; zinit snippet OMZ::plugins/pip/pip.plugin.zsh
+zinit ice if"[ -x \"$(command -v sudo)\" ]"; zinit snippet OMZ::plugins/sudo/sudo.plugin.zsh
+zinit ice if"[ -x \"$(command -v docker)\" ]"; zinit snippet OMZ::plugins/docker/docker.plugin.zsh
+zinit ice if"[ -x \"$(command -v docker-compose)\" ]"; zinit snippet OMZ::plugins/docker-compose/docker-compose.plugin.zsh
+zinit ice if"[ -x \"$(command -v go)\" ]"; zinit snippet OMZ::plugins/golang/golang.plugin.zsh
+zinit ice if"[ -x \"$(command -v ngrok)\" ]"; zinit snippet OMZ::plugins/ngrok/ngrok.plugin.zsh
+zinit ice if"[ -x \"$(command -v svn)\" ]"; zinit snippet OMZ::plugins/svn/svn.plugin.zsh
+zinit ice if"[ -x \"$(command -v brew)\" ]"; zinit snippet OMZ::plugins/brew/brew.plugin.zsh
 
 # --- Colored Man Pages ---
 zinit snippet OMZ::plugins/colored-man-pages/colored-man-pages.plugin.zsh
 
 # --- Fast Syntax Highlighting (should be loaded last) ---
 zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Set Andromeda theme for syntax highlighting.
+fast-theme andromeda &>/dev/null
 
 # Initialize zoxide to enable its functionality in the shell.
 eval "$(zoxide init zsh)"
@@ -255,4 +264,12 @@ fi
 # This file is generated by `p10k configure` and contains all visual settings for the prompt.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Let kew detect Kitty graphics protocol through tmux.
+alias kew='KITTY_WINDOW_ID=1 kew'
 
+
+
+. "$HOME/.local/bin/env"
+
+# bun completions
+[ -s "/home/karnadi/.bun/_bun" ] && source "/home/karnadi/.bun/_bun"

@@ -1,0 +1,59 @@
+# Andromeda theme for kew - matches Ghostty/tmux/Helix/OpenCode
+# Palette: bg=#23262E fg=#D5CED9 accent=#00e8c6 purple=#c74ded pink=#ff00aa
+
+[theme]
+name=Andromeda
+author=Karnadi
+
+# Core colors
+accent=#00e8c6
+text=#D5CED9
+textDim=#A0A1A7
+textMuted=#746f77
+
+# General Colors
+logo=#00e8c6
+header=#00e8c6
+footer=#A0A1A7
+help=#00e8c6
+link=#7cb7ff
+nowplaying=#ff00aa
+
+# Playlist View
+playlist.rownum=#746f77
+playlist.title=#D5CED9
+playlist.playing=#00e8c6
+
+# Track View
+trackview.title=#D5CED9
+trackview.artist=#c74ded
+trackview.album=#7cb7ff
+trackview.year=#f39c12
+trackview.time=#00e8c6
+trackview.visualizer=#f39c12
+trackview.lyrics=#D5CED9
+
+# Library View
+library.artist=#00e8c6
+library.album=#c74ded
+library.track=#D5CED9
+library.enqueued=#96E072
+library.playing=#ff00aa
+
+# Search
+search.label=#c74ded
+search.query=#D5CED9
+search.result=#D5CED9
+search.enqueued=#96E072
+search.playing=#00e8c6
+
+# Progress
+progress.filled=#00e8c6
+progress.empty=#363c49
+progress.elapsed=#00e8c6
+
+# Status
+status.info=-1
+status.warning=#f39c12
+status.error=#ee5d43
+status.success=#96E072

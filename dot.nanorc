@@ -1,0 +1,20 @@
+# Andromeda theme for GNU nano
+
+# UI Colors (Andromeda palette)
+set titlecolor bold,#00e8c6,#23262E
+set numbercolor #7cb7ff
+set selectedcolor #D5CED9,#3D4352
+set stripecolor #2e323d
+set spotlightcolor bold,#23262E,#FFE66D
+set scrollbar color #363c49,#23262E
+set minicolor bold,#D5CED9,#2b303b
+set emptylinecolor #23262E
+set errorcolor bold,#ee5d43,#23262E
+set promptcolor #D5CED9,#2b303b
+
+# Enable line numbers with minimum gap
+set linenumbers
+set constantshow
+
+# Include syntax highlighting
+include "/usr/share/nano/*.nanorc"

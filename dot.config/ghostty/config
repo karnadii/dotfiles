@@ -1,0 +1,15 @@
+# Andromeda theme — Ghostty (using built-in theme)
+theme = Andromeda
+font-family = "JetBrainsMono NFM"
+font-size = 12
+
+# Background / foreground
+background = #23262E
+foreground = #D5CED9
+
+# Cursor
+cursor-color = #00e8c6
+
+# Selection
+selection-background = #3D4352
+selection-foreground = #D5CED9
