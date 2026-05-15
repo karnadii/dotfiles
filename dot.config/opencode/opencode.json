@@ -60,10 +60,7 @@
         "-y",
         "@upstash/context7-mcp"
       ],
-      "enabled": true,
-      "env": {
-        "CONTEXT7_API_KEY": "YOUR_API_KEY"
-      }
+      "enabled": true
     }
   },
   "lsp": {

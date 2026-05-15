@@ -119,5 +119,5 @@ dotfiles/
 
 Set your API keys via environment variables (not tracked):
 
-- `~/.zshenv` → export keys for agentrouter, deepseek, zhipu, ollama, etc.
+- `~/.zshenv` → export keys for agentrouter, deepseek, zhipu, ollama, context7, etc.
 - `~/.local/bin/env` → sourced by `.zshenv`, ideal for private vars (not tracked)
