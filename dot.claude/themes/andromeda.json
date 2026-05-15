@@ -37,6 +37,9 @@
     "rate_limit_fill": "#00e8c6",
     "rate_limit_empty": "#363c49",
     "briefLabelYou": "#D5CED9",
-    "briefLabelClaude": "#00e8c6"
+    "briefLabelClaude": "#00e8c6",
+    "bashMessageBackgroundColor": "#2b303b",
+    "memoryBackgroundColor": "#2b303b",
+    "inactiveShimmer": "#A0A1A7"
   }
 }
