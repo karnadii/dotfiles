@@ -371,8 +371,7 @@
       "npm": "@ai-sdk/openai-compatible",
       "name": "agentrouter",
       "options": {
-        "baseURL": "https://agentrouter.org/v1",
-        "apiKey": "sk-Cw5SYVGmtWfAq0F63n2NKBxqmIylLsogxGM9FGjOpcmUBGNe"
+        "baseURL": "https://agentrouter.org/v1"
       },
       "models": {
         "glm-5.1": {
