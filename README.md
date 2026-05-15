@@ -10,7 +10,6 @@ Karnadi's Zsh-centric dotfiles — Andromeda themed across all tools.
 | **tmux** | `.tmux.conf` |
 | **opencode** | `opencode.json`, `AGENTS.md`, `themes/andromeda.json` |
 | **helix** | `config.toml`, `languages.toml`, `themes/andromeda.toml` |
-| **neovim** | `chadrc.lua`, `themes/andromeda.lua` |
 | **ghostty** | `config` |
 | **kew** | `kewrc`, `themes/andromeda.theme` |
 | **bat** | `themes/andromeda/andromeda.tmTheme` |
@@ -44,7 +43,6 @@ dotfiles/
 │   ├── ghostty/
 │   ├── helix/
 │   ├── kew/
-│   ├── nvim/
 │   ├── opencode/
 │   └── vivid/
 └── terminal/             # Terminal-specific
