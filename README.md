@@ -174,6 +174,7 @@ dotfiles/
 | `imagemagick` | Image convert/resize |
 | `kew` | Terminal music player |
 | `just` | Command runner (like make) |
+| `calc` or `= 2+2` | Inline calculator (supports `sin`, `sqrt`, etc.) |
 | `yazi` | Terminal file manager |
 | `yq` | YAML processor |
 | `jq` | JSON processor |
